@@ -1,0 +1,7 @@
+# CSAPP configuration for make
+# compiler options
+OPTIMIZE                  = Y
+DEBUG                     = Y
+VERBOSE                   = N
+
+

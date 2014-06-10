@@ -1,0 +1,30 @@
+VERSION = 1.2.19
+BUILD_TIME    = $(shell date '+%y-%m-%d %R')
+CROSS_COMPILE =
+TOP := ..
+
+# toolchain
+HOSTCC        = $(CROSS_COMPILE)gcc
+CXX           = $(CROSS_COMPILE)g++
+AR            = $(CROSS_COMPILE)ar
+LD            = $(CROSS_COMPILE)ld
+NM            = $(CROSS_COMPILE)nm
+STRIP         = $(CROSS_COMPILE)strip
+OBJCOPY       = $(CROSS_COMPILE)objcopy
+OBJDUMP       = $(CROSS_COMPILE)objdump
+RANLIB        = $(CROSS_COMPILE)ranlib
+
+SHELL         = bash
+CP            = cp
+MV            = mv
+RM            = rm
+
+# If you dont want to see every executed command ...
+ifeq ($(VERBOSE), Y)
+.SILENT:
+endif
+
+STATIC_LIB    := $(TOP)/src/libcsapp.a
+INC           := $(TOP)/include
+CFLAGS        := -Wall -O3 -I$(INC)
+
