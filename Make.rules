@@ -4,6 +4,7 @@ CROSS_COMPILE =
 TOP := ..
 
 # toolchain
+CROSS_COMPILE =
 HOSTCC        = $(CROSS_COMPILE)gcc
 CXX           = $(CROSS_COMPILE)g++
 AR            = $(CROSS_COMPILE)ar
