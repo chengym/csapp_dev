@@ -6,6 +6,6 @@ void foo(void);
 
 int main(void)
 {
-        foo();
-        return 0;
+    foo();
+    return 0;
 }

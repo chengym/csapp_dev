@@ -6,5 +6,5 @@
 
 int main()
 {
-        return sum(1, 3);
+    return sum(1, 3);
 }

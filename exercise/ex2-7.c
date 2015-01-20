@@ -12,8 +12,8 @@ extern void show_bytes(byte_pointer start, int len);
 
 int main(void)
 {
-        const char *s = "abcdef";
-        show_bytes((byte_pointer)s, strlen(s));
+    const char *s = "abcdef";
+    show_bytes((byte_pointer) s, strlen(s));
 
-        return 0;
+    return 0;
 }

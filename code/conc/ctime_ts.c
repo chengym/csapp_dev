@@ -4,7 +4,7 @@
 #include "csapp.h"
 #define MAXSTR 128
 
-static sem_t mutex; /* protects calls to ctime */
+static sem_t mutex;             /* protects calls to ctime */
 
 static void init_ctime_ts(void)
 {
@@ -12,16 +12,17 @@ static void init_ctime_ts(void)
 }
 
 /* $begin ctime_ts */
-char *ctime_ts(const time_t *timep, char *privatep)
+char *ctime_ts(const time_t * timep, char *privatep)
 {
-    char *sharedp; 
+    char *sharedp;
 
     P(&mutex);
     sharedp = ctime(timep);
-    strcpy(privatep, sharedp); /* Copy string from shared to private */
+    strcpy(privatep, sharedp);  /* Copy string from shared to private */
     V(&mutex);
     return privatep;
 }
+
 /* $end ctime_ts */
 
 int main()

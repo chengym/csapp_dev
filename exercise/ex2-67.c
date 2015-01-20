@@ -31,8 +31,8 @@
 
 int int_size_is_32(void)
 {
-        int t = 0x80000000;
-        return t == INT_MIN;
+    int t = 0x80000000;
+    return t == INT_MIN;
 }
 
 /*
@@ -49,8 +49,8 @@ int int_size_is_32(void)
  */
 int int_size_is_at_least_32(void)
 {
-        int t = 0x80000000;
-        return t;
+    int t = 0x80000000;
+    return t;
 }
 
 /*
@@ -58,6 +58,6 @@ int int_size_is_at_least_32(void)
  */
 int int_size_is_at_least_16(void)
 {
-        int t = 0x8000;
-        return t;
+    int t = 0x8000;
+    return t;
 }

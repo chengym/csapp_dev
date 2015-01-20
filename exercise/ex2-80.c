@@ -14,7 +14,7 @@
  */
 int nlowest_zero(int n)
 {
-        return ~((1 << n) - 1);
+    return ~((1 << n) - 1);
 }
 
 /*
@@ -22,5 +22,5 @@ int nlowest_zero(int n)
  */
 int nlowestone_minus_mlowestone(int n, int m)
 {
-        return (1 << (m + n)) - (1 << m);
+    return (1 << (m + n)) - (1 << m);
 }

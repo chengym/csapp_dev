@@ -9,10 +9,10 @@ int *bufp1;
 
 void swap()
 {
-        int temp;
+    int temp;
 
-        bufp1 = &buf[1];
-        temp = *bufp0;
-        *bufp0 = *bufp1;
-        *bufp1 = temp;
+    bufp1 = &buf[1];
+    temp = *bufp0;
+    *bufp0 = *bufp1;
+    *bufp1 = temp;
 }

@@ -8,7 +8,7 @@
 
 long int simple_1(long int *xp, long int y)
 {
-        long int t = *xp + t;
-        *xp = t;
-        return t;
+    long int t = *xp + t;
+    *xp = t;
+    return t;
 }

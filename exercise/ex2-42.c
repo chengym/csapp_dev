@@ -11,8 +11,8 @@
  */
 int div16(int x)
 {
-        int sign = (x & (1<<31)) >> 31; /* sign 的位级表示是全 0 或者全 1 */
-        return (x + (sign & 0x0F)) >> 4;
+    int sign = (x & (1 << 31)) >> 31;   /* sign 的位级表示是全 0 或者全 1 */
+    return (x + (sign & 0x0F)) >> 4;
 }
 
 /*
@@ -24,7 +24,7 @@ int div16(int x)
  */
 int book_div16(int x)
 {
-        /* Compute bias to be either 0 (x >= 0) or 15 (x < 0) */
-        int bias = (x >> 31) & 0xF;
-        return (x + bias) >> 4;
+    /* Compute bias to be either 0 (x >= 0) or 15 (x < 0) */
+    int bias = (x >> 31) & 0xF;
+    return (x + bias) >> 4;
 }

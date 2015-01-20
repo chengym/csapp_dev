@@ -10,14 +10,12 @@
 
 static void *find_fit(size_t asize)
 {
-        char *fit;
+    char *fit;
 
-        for (fit = NEXT_BLKP(heap_listp);
-             GET_SIZE(fit) > 0;
-             fit = NEXT_BLKP(fit)) {
-                if (GET_ALLOC(fit) && GET_SIZE(fit) >= asize)
-                        return (void *)fit;
-        }
+    for (fit = NEXT_BLKP(heap_listp); GET_SIZE(fit) > 0; fit = NEXT_BLKP(fit)) {
+        if (GET_ALLOC(fit) && GET_SIZE(fit) >= asize)
+            return (void *) fit;
+    }
 
-        return NULL;
+    return NULL;
 }

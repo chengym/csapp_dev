@@ -20,8 +20,8 @@
  */
 int divide_power2(int x, int k)
 {
-        int sign = (x & INT_MIN) == INT_MIN;
-        int mask = (1 << k) - 1;
-        int bias = (mask + !sign) & mask;
-        return (x + bias) >> k;
+    int sign = (x & INT_MIN) == INT_MIN;
+    int mask = (1 << k) - 1;
+    int bias = (mask + !sign) & mask;
+    return (x + bias) >> k;
 }

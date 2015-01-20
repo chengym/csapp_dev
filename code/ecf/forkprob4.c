@@ -1,7 +1,7 @@
 /* $begin forkprob4 */
 #include "csapp.h"
 
-void doit() 
+void doit()
 {
     Fork();
     Fork();
@@ -9,12 +9,11 @@ void doit()
     return;
 }
 
-int main() 
+int main()
 {
     doit();
     printf("hello\n");
     exit(0);
 }
+
 /* $end forkprob4 */
-
-

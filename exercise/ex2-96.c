@@ -34,33 +34,34 @@ typedef unsigned float_bits;
 
 int float_f2i(float_bits f)
 {
-        unsigned sign = f >> 31;
-        unsigned exp = (f >> 23) & 0xFF;
-        unsigned frac = f & 0x7FFFFF;
-        int E = (int)exp - 127;
+    unsigned sign = f >> 31;
+    unsigned exp = (f >> 23) & 0xFF;
+    unsigned frac = f & 0x7FFFFF;
+    int E = (int) exp - 127;
 
-        if (exp == 0xFF)        /* NaN, +oo, -oo */
-                return INT_MIN;
-        if (exp == 0 || E < 0)
-                return 0;
-        if (sign == 0 && E > 30)
-                return INT_MIN;
-        if (sign == 1 && E > 31)
-                return INT_MIN;
-        if (sign == 1 && E == 31 && frac > 0)
-                return INT_MIN;
+    if (exp == 0xFF)            /* NaN, +oo, -oo */
+        return INT_MIN;
+    if (exp == 0 || E < 0)
+        return 0;
+    if (sign == 0 && E > 30)
+        return INT_MIN;
+    if (sign == 1 && E > 31)
+        return INT_MIN;
+    if (sign == 1 && E == 31 && frac > 0)
+        return INT_MIN;
 
-        int shift;
-        if (E > 23) {
-                shift = E - 23;
-                frac = (1 << E) + (frac << shift);
-        } else /* 0 <= E <= 23 */ {
-                shift = 23 - E;
-                frac = (1 << E) + (frac >> shift);
-        }
+    int shift;
+    if (E > 23) {
+        shift = E - 23;
+        frac = (1 << E) + (frac << shift);
+    } else {                    /* 0 <= E <= 23 */
 
-        if (sign == 1)
-                frac = ~frac + 1;
+        shift = 23 - E;
+        frac = (1 << E) + (frac >> shift);
+    }
 
-        return frac;
+    if (sign == 1)
+        frac = ~frac + 1;
+
+    return frac;
 }

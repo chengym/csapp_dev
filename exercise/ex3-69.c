@@ -8,10 +8,11 @@
 
 typedef struct ELE *tree_ptr;
 
-struct ELE {
-        tree_ptr left;
-        tree_ptr right;
-        long val;
+struct ELE
+{
+    tree_ptr left;
+    tree_ptr right;
+    long val;
 };
 
 /*
@@ -28,12 +29,12 @@ struct ELE {
  */
 long trace(tree_ptr tp)
 {
-        long node = 0;
+    long node = 0;
 
-        while (tp) {
-                node = tp->val;
-                tp = tp->left;
-        }
+    while (tp) {
+        node = tp->val;
+        tp = tp->left;
+    }
 
-        return node;
+    return node;
 }

@@ -9,14 +9,14 @@
  */
 void transpose(int M, int A[M][M])
 {
-        int i, j;
+    int i, j;
 
-        for (i = 0; i < M; i++) {
-                int *col = &A[0][i];
-                for (j = 0; j < i; j++) {
-                        int t = A[i][j];
-                        A[i][j] = *col;
-                        col += M;
-                }
+    for (i = 0; i < M; i++) {
+        int *col = &A[0][i];
+        for (j = 0; j < i; j++) {
+            int t = A[i][j];
+            A[i][j] = *col;
+            col += M;
         }
+    }
 }

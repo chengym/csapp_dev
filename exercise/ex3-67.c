@@ -4,16 +4,19 @@
  * mofaph@gmail.com
  */
 
-union ele {
-        struct {
-                int *p;
-                int x;
-        } e1;
+union ele
+{
+    struct
+    {
+        int *p;
+        int x;
+    } e1;
 
-        struct {
-                int y;
-                union ele *next;
-        } e2;
+    struct
+    {
+        int y;
+        union ele *next;
+    } e2;
 };
 
 /*
@@ -23,5 +26,5 @@ union ele {
  */
 void proc(union ele *up)
 {
-        up->next->x = *(up->next->p) - up->y;
+    up->next->x = *(up->next->p) - up->y;
 }

@@ -14,17 +14,17 @@
 
 void doit()
 {
-        if (Fork() == 0) {
-                Fork();
-                printf("hello\n");
-                return;
-        }
+    if (Fork() == 0) {
+        Fork();
+        printf("hello\n");
         return;
+    }
+    return;
 }
 
 int main()
 {
-        doit();
-        printf("hello\n");
-        exit(0);
+    doit();
+    printf("hello\n");
+    exit(0);
 }

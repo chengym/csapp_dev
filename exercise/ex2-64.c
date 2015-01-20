@@ -10,5 +10,5 @@
 
 int any_even_one(unsigned x)
 {
-        return (x & 0x5555) & 1;
+    return (x & 0x5555) & 1;
 }

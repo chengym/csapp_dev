@@ -12,7 +12,7 @@ int x;
 
 void f()
 {
-        x = 15213;
+    x = 15213;
 }
 
 /*
@@ -21,8 +21,8 @@ void f()
 double x;
 void f()
 {
-        return;
-        x = -0.0;
+    return;
+    x = -0.0;
 }
 
 /*
@@ -33,5 +33,5 @@ void f()
 
 void f()
 {
-        /* x = -0.0; */
+    /* x = -0.0; */
 }

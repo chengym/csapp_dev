@@ -30,12 +30,14 @@
 
 int saturating_add(int x, int y)
 {
-        int r = x + y;
-        int pos_overflow = !(x & INT_MIN) && !(y & INT_MIN) && (r & INT_MIN);
-        int neg_overflow = (x & INT_MIN) && (y & INT_MIN) && !(r & INT_MIN);
-        int TMax_when_overflow = INT_MAX & (INT_MIN - (pos_overflow | neg_overflow));
-        int TMax_when_not_pos_overflow = (INT_MAX & (INT_MIN - !pos_overflow));
-        int bias = INT_MIN + TMax_when_not_pos_overflow + !pos_overflow + neg_overflow;
+    int r = x + y;
+    int pos_overflow = !(x & INT_MIN) && !(y & INT_MIN) && (r & INT_MIN);
+    int neg_overflow = (x & INT_MIN) && (y & INT_MIN) && !(r & INT_MIN);
+    int TMax_when_overflow =
+        INT_MAX & (INT_MIN - (pos_overflow | neg_overflow));
+    int TMax_when_not_pos_overflow = (INT_MAX & (INT_MIN - !pos_overflow));
+    int bias =
+        INT_MIN + TMax_when_not_pos_overflow + !pos_overflow + neg_overflow;
 
-        return (r | TMax_when_overflow) + bias;
+    return (r | TMax_when_overflow) + bias;
 }

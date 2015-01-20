@@ -6,12 +6,12 @@
  */
 int is_little_endian(void)
 {
-        int i = 1;
-        char *p = (char *)&i;
+    int i = 1;
+    char *p = (char *) &i;
 
-        /*
-         * 小端法的机器上，最低有效字节是 1
-         * 大端法的机器上，最低有效字节是 0
-         */
-        return *p;
+    /*
+     * 小端法的机器上，最低有效字节是 1
+     * 大端法的机器上，最低有效字节是 0
+     */
+    return *p;
 }

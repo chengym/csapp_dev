@@ -11,15 +11,15 @@
 
 void doit()
 {
-        Fork();
-        Fork();
-        printf("hello\n");
-        return;
+    Fork();
+    Fork();
+    printf("hello\n");
+    return;
 }
 
 int main()
 {
-        doit();
-        printf("hello\n");
-        return;
+    doit();
+    printf("hello\n");
+    return;
 }
