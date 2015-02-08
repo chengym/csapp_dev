@@ -1,13 +1,19 @@
 /* 
  * badcnt.c - An improperly synchronized counter program 
  */
-/* $begin badcnt */
 #include "csapp.h"
 
-void *thread(void *vargp);      /* Thread routine prototype */
+volatile int cnt = 0;
 
-/* Global shared variable */
-volatile int cnt = 0;           /* Counter */
+void *thread(void *vargp)
+{
+    int i, niters = *((int *) vargp);
+
+    for (i = 0; i < niters; i++)
+        cnt++;
+
+    return NULL;
+}
 
 int main(int argc, char **argv)
 {
@@ -22,7 +28,7 @@ int main(int argc, char **argv)
     niters = atoi(argv[1]);
 
     /* Create threads and wait for them to finish */
-    Pthread_creat(&tid1, NULL, thread, &niters);
+    Pthread_create(&tid1, NULL, thread, &niters);
     Pthread_create(&tid2, NULL, thread, &niters);
     Pthread_join(tid1, NULL);
     Pthread_join(tid2, NULL);
@@ -32,18 +38,6 @@ int main(int argc, char **argv)
         printf("BOOM! cnt=%d\n", cnt);
     else
         printf("OK cnt=%d\n", cnt);
+
     exit(0);
 }
-
-/* Thread routine */
-void *thread(void *vargp)
-{
-    int i, niters = *((int *) vargp);
-
-    for (i = 0; i < niters; i++)        //line:conc:badcnt:beginloop
-        cnt++;                  //line:conc:badcnt:endloop
-
-    return NULL;
-}
-
-/* $end badcnt */
