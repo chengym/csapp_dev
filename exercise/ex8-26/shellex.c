@@ -1,8 +1,6 @@
 /*
  * 8.26
  *
- * mofaph@gmail.com
- * 2013-7-7
  *
  * unix> make
  * unix> ./t

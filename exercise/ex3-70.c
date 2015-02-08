@@ -3,7 +3,6 @@
  *
  * $ gcc -m64 -S ex3-70.c # 生成 64 位的汇编代码
  *
- * mofaph@gmail.com
  */
 
 typedef struct ELE *tree_ptr;

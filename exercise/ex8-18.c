@@ -1,7 +1,6 @@
 /*
  * 8.18
  *
- * mofaph@gmail.com
  *
  * unix> cc -I../common ex8-18.c ../common/csapp.c -lpthread
  *

@@ -1,7 +1,6 @@
 /*
  * test 9.17
  *
- * mofaph@gmail.com
  *
  * unix> gcc -I../common ex9-17.c t9-17.c ../sample/ch09/memlib.c ../common/csapp.c -lpthread
  */

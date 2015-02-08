@@ -1,8 +1,6 @@
 /*
  * 9.20 -- test driver
  *
- * mofaph@gmail.com
- * 2013-6-28
  *
  * unix> cc -Wall ex9-20.c t9-20.c -o ex9-20
  * unix> ./ex9-20

@@ -1,7 +1,5 @@
 # Makefile for ex9-20
 
-# mofaph@gmail.com
-# 2013-6-30
 
 CC = gcc
 CFLAGS = -Wall

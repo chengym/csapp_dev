@@ -1,8 +1,6 @@
 /*
  * 11.11
  *
- * mofaph@gmail.com
- * 2013-6-8
  *
  * unix> cc -I../../../common ../../../common/csapp.c adder.c -lpthread -o adder
  */

@@ -1,7 +1,6 @@
 /*
  * 8.24
  *
- * mofaph@gmail.com
  *
  * unix> cc -I../common ex8-24.c ../common/csapp.c -lpthread
  */

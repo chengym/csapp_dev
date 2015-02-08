@@ -8,7 +8,6 @@
  *     $ ./a.out
  *     $ time ./a.out > t2-95.test
  *
- * mofaph@gmail.com
  */
 
 #include <stdio.h>              /* printf() */

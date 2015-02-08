@@ -1,6 +1,5 @@
 # Makefile for ex8-26
 
-# mofaph@gmail.com
 # 2013-7-7
 
 CC = gcc

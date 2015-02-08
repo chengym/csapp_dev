@@ -1,8 +1,6 @@
 /*
  * 10.7
  *
- * mofaph@gmail.com
- * 2013-5-11
  *
  * $ cc -I../common ../common/csapp.c ex10-7.c -lpthread
  * # 注意，上面链接到 pthread 库不是代码必须的，是由于 csapp.c 中需要

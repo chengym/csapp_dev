@@ -1,6 +1,5 @@
 7.15
 
-mofaph@gmail.com
 --------------------------------------------------------------------------------
 
 A. $ libs=$(find /{,usr/}lib -type f -name "libc.a" -o -name "libm.a")

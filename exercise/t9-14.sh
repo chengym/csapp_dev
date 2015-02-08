@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# mofaph@gmail.com
 
 hello_file="hello.txt"
 t_914="t9-14.txt"

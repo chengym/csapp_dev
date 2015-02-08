@@ -1,7 +1,6 @@
 /*
  * 2.59
  *
- * mofaph@gmail.com
  * 2013-12-17
  *
  * unix> cc -Wall ex2-59.c t2-59.c -o ex2-59

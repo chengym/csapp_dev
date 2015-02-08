@@ -1,8 +1,6 @@
 /*
  * 11.10
  *
- * mofaph@gmail.com
- * 2013-5-31
  *
  * unix> cc -Wall -I../../common ../../common/csapp.c tiny.c -lpthread -o tiny
  */

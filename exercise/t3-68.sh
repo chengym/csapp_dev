@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # 测试家庭作业 3.68
-# mofaph@gmail.com
 
 extern_file=ex3-68
 test_file=t3-68

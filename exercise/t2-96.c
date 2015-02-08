@@ -7,7 +7,6 @@
  * 测试：
  *     $ ./a.out
  *
- * mofaph@gmail.com
  */
 
 #include <limits.h>

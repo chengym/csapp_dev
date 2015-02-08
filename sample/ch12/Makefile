@@ -1,7 +1,5 @@
 # Makefile for csapp chapter 12
 
-# mofaph@gmail.com
-# 2013-8-10
 
 CC = gcc
 CFLAGS = -Wall

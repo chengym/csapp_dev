@@ -1,7 +1,6 @@
 /*
  * 10.5
  *
- * mofaph@gmail.com
  *
  * 假设磁盘文件 foobar.txt 由 6 个 ASCII 码字符“foobar”组成，那么下列程序的输出
  * 是什么？

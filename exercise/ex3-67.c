@@ -1,7 +1,6 @@
 /*
  * 3.67
  *
- * mofaph@gmail.com
  */
 
 union ele

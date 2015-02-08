@@ -1,7 +1,5 @@
 10.9
 
-bskim45@gmail.com
-2013-12-17
 --------------------------------------------------------------------------------
 
 Before the call to execve, the child process opens foo.txt as descriptor 3,

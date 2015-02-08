@@ -3,7 +3,6 @@
  *
  * unix> gcc -Wall ex9-14.c t9-14.c
  *
- * mofaph@gmail.com
  */
 
 #include <stdio.h>
