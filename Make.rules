@@ -30,3 +30,4 @@ INC           := $(TOP)/include
 CFLAGS        := -Wall -O3 -I$(INC)
 EXTRALIBS     := -lpthread
 LDLIBS        :=-lcsapp $(EXTRALIBS)
+OBJ_FILE      := *.o

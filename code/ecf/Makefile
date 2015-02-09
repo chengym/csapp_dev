@@ -43,4 +43,4 @@ all: $(OBJS)
 
 clean:
 	echo "Cleaning all test service binaries ..."
-	rm -f $(OBJS) *.o .depend
+	rm -f $(OBJS) $(OBJ_FILE) .depend

@@ -18,4 +18,4 @@ echoservert_pre: echoservert_pre.o sbuf.o
 
 clean:
 	@echo "Cleaning all test service binaries ..."
-	@rm -f $(OBJS) .depend
+	@rm -f $(OBJS) $(OBJ_FILE) .depend
