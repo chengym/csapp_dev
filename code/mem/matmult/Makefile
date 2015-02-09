@@ -1,17 +1,15 @@
-TOP=../../..
-include $(TOP)/config
-include $(TOP)/Make.rules
+CC = gcc
+CFLAGS = -O3 -Wall -m32
 
-CFLAGS += -I../../vm
+all: mm bmm
 
-OBJS = mm
+mm: mm.c clock.c fcycmm.c mm.h
+	$(CC) $(CFLAGS) -o mm mm.c clock.c fcycmm.c
 
-all: $(OBJS)
-
-%.o: %.c
-	@echo CC $@
-	@$(CC) -c -o $*.o $(CFLAGS) $<
+bmm: bmm.c clock.c fcycbmm.c mm.h
+	$(CC) $(CFLAGS) -o bmm bmm.c clock.c fcycbmm.c
 
 clean:
-	@echo "Cleaning all test service binaries ..."
-	@rm -f $(OBJS) .depend
+	rm -f *.o mm bmm *~
+
+
