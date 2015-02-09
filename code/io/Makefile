@@ -4,13 +4,9 @@ include $(TOP)/Make.rules
 
 CFLAGS += -I../include
 
-OBJS = badcnt ctime_ts norace tfgets-main select race echoservers sharing \
-	   echoservert_pre rand_r echoserverp echoservert hello hellobug psum rand  
+OBJS = cpfile cpstdin statcheck
 
 all: $(OBJS)
-
-echoservert_pre: echoservert_pre.o sbuf.o
-	@$(CC) $^ $(LDLIBS) -o $@
 
 %.o: %.c
 	@echo CC $@

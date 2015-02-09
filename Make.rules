@@ -1,7 +1,7 @@
 VERSION = 1.2.19
 BUILD_TIME    = $(shell date '+%y-%m-%d %R')
 CROSS_COMPILE =
-TOP := ./
+TOP := .
 
 # toolchain
 CROSS_COMPILE =
@@ -29,4 +29,4 @@ STATIC_LIB    := $(TOP)/src/libcsapp.a
 INC           := $(TOP)/include
 CFLAGS        := -Wall -O3 -I$(INC)
 EXTRALIBS     := -lpthread
-
+LDLIBS        :=-lcsapp $(EXTRALIBS)

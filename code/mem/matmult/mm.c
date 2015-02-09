@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mm.h"
-#include "fcycmm.h"
-#include "clock.h"
 
 /* whether or not fcyc should clear the cache */
 #define CLEARCACHE 0  
