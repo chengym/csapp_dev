@@ -3,7 +3,7 @@ CPP=cpp
 ICS2 = ..
 CFLAGS=-O2 -Wall -std=c99
 CSAPP2DIR = ..
-CINC = -I$(CSAPP2DIR)/include
+CINC = -I$(CSAPP2DIR)/include -lm
 CSAPPLIB32 = $(CSAPP2DIR)/lib/libcsapp32.a
 CSAPPLIB64 = $(CSAPP2DIR)/lib/libcsapp64.a
 

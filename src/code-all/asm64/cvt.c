@@ -7,6 +7,7 @@ dest_t cvt(src_t x)
 {
     return (dest_t) x;
 }
+
 /* $end cvt-c */
 
 
@@ -70,7 +71,3 @@ long cvt_f2sl(float x)
 {
     return x;
 }
-
-
-
-

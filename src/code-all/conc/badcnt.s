@@ -1,23 +1,26 @@
 	.file	"badcnt.c"
 	.text
+	.p2align 4,,15
 	.globl	thread
 	.type	thread, @function
 thread:
 .LFB93:
 	.cfi_startproc
 	movl	(%rdi), %ecx
+	xorl	%eax, %eax
 	testl	%ecx, %ecx
-	jle	.L2
-	movl	$0, %eax
-.L3:
+	jle	.L5
+	.p2align 4,,10
+	.p2align 3
+.L6:
 	movl	cnt(%rip), %edx
-	addl	$1, %edx
-	movl	%edx, cnt(%rip)
 	addl	$1, %eax
+	addl	$1, %edx
 	cmpl	%ecx, %eax
-	jne	.L3
-.L2:
-	movl	$0, %eax
+	movl	%edx, cnt(%rip)
+	jne	.L6
+.L5:
+	xorl	%eax, %eax
 	ret
 	.cfi_endproc
 .LFE93:
@@ -29,7 +32,8 @@ thread:
 	.string	"BOOM! cnt=%d\n"
 .LC2:
 	.string	"OK cnt=%d\n"
-	.text
+	.section	.text.startup,"ax",@progbits
+	.p2align 4,,15
 	.globl	main
 	.type	main, @function
 main:
@@ -38,56 +42,55 @@ main:
 	subq	$40, %rsp
 	.cfi_def_cfa_offset 48
 	cmpl	$2, %edi
-	je	.L5
+	je	.L9
 	movq	(%rsi), %rdx
-	movl	$.LC0, %esi
 	movl	$1, %edi
-	movl	$0, %eax
+	movl	$.LC0, %esi
+	xorl	%eax, %eax
 	call	__printf_chk
-	movl	$0, %edi
+	xorl	%edi, %edi
 	call	exit
-.L5:
+.L9:
 	movq	8(%rsi), %rdi
 	movl	$10, %edx
-	movl	$0, %esi
+	xorl	%esi, %esi
 	call	strtol
-	movl	%eax, 12(%rsp)
 	leaq	12(%rsp), %rcx
-	movl	$thread, %edx
-	movl	$0, %esi
 	leaq	16(%rsp), %rdi
+	xorl	%esi, %esi
+	movl	$thread, %edx
+	movl	%eax, 12(%rsp)
 	call	Pthread_create
 	leaq	12(%rsp), %rcx
-	movl	$thread, %edx
-	movl	$0, %esi
 	leaq	24(%rsp), %rdi
+	movl	$thread, %edx
+	xorl	%esi, %esi
 	call	Pthread_create
-	movl	$0, %esi
 	movq	16(%rsp), %rdi
+	xorl	%esi, %esi
 	call	Pthread_join
-	movl	$0, %esi
 	movq	24(%rsp), %rdi
+	xorl	%esi, %esi
 	call	Pthread_join
-	movl	cnt(%rip), %eax
 	movl	12(%rsp), %ecx
+	movl	cnt(%rip), %eax
 	leal	(%rcx,%rcx), %edx
 	cmpl	%eax, %edx
-	je	.L6
 	movl	cnt(%rip), %edx
+	je	.L10
 	movl	$.LC1, %esi
 	movl	$1, %edi
-	movl	$0, %eax
+	xorl	%eax, %eax
 	call	__printf_chk
-	jmp	.L7
-.L6:
-	movl	cnt(%rip), %edx
+.L11:
+	xorl	%edi, %edi
+	call	exit
+.L10:
 	movl	$.LC2, %esi
 	movl	$1, %edi
-	movl	$0, %eax
+	xorl	%eax, %eax
 	call	__printf_chk
-.L7:
-	movl	$0, %edi
-	call	exit
+	jmp	.L11
 	.cfi_endproc
 .LFE92:
 	.size	main, .-main

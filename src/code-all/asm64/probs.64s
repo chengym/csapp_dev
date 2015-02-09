@@ -1,0 +1,68 @@
+	.file	"probs.c"
+	.text
+	.p2align 4,,15
+	.globl	incrprob
+	.type	incrprob, @function
+incrprob:
+.LFB0:
+	.cfi_startproc
+	addl	(%rdx), %edi
+	movl	%edi, (%rdx)
+	movslq	%edi, %rdi
+	addq	%rdi, (%rsi)
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	incrprob, .-incrprob
+	.p2align 4,,15
+	.globl	incrprob_u
+	.type	incrprob_u, @function
+incrprob_u:
+.LFB1:
+	.cfi_startproc
+	addl	(%rdx), %edi
+	movl	%edi, (%rdx)
+	movslq	%edi, %rdi
+	addq	%rdi, (%rsi)
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	incrprob_u, .-incrprob_u
+	.p2align 4,,15
+	.globl	arithprob
+	.type	arithprob, @function
+arithprob:
+.LFB2:
+	.cfi_startproc
+	movsbl	%sil, %eax
+	imull	%edi, %eax
+	imull	%edx, %ecx
+	addl	%ecx, %eax
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	arithprob, .-arithprob
+	.p2align 4,,15
+	.globl	moveprob
+	.type	moveprob, @function
+moveprob:
+.LFB3:
+	.cfi_startproc
+	movsbq	%dil, %rdi
+	movslq	%esi, %rsi
+	movzbl	%dl, %edx
+	movl	%ecx, %eax
+	movq	%rdi, gv1(%rip)
+	movq	%rsi, gv2(%rip)
+	movq	%rdx, gv3(%rip)
+	movq	%rax, gv4(%rip)
+	ret
+	.cfi_endproc
+.LFE3:
+	.size	moveprob, .-moveprob
+	.comm	gv4,8,8
+	.comm	gv3,8,8
+	.comm	gv2,8,8
+	.comm	gv1,8,8
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

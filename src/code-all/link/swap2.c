@@ -4,16 +4,16 @@ extern int buf[];
 int *bufp0 = &buf[0];
 static int *bufp1;
 
-static void incr() 
+static void incr()
 {
-    static int count=0;       
+    static int count = 0;
 
-    count++;  
+    count++;
 }
 
-void swap() 
+void swap()
 {
-    int temp;   
+    int temp;
 
     incr();
     bufp1 = &buf[1];
@@ -21,5 +21,5 @@ void swap()
     *bufp0 = *bufp1;
     *bufp1 = temp;
 }
-/* $end swap2 */
 
+/* $end swap2 */

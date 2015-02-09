@@ -11,36 +11,37 @@
 #define N 10
 
 /* Global variables */
-sem_t sem;    /* Initially = N */
-sem_t wmutex; /* Initially = 1 */
+sem_t sem;                      /* Initially = N */
+sem_t wmutex;                   /* Initially = 1 */
 
-void reader(void) 
+void reader(void)
 {
     while (1) {
-	P(&sem);
+        P(&sem);
 
-	/* Critical section: */
-	/* Reading happens   */
+        /* Critical section: */
+        /* Reading happens   */
 
-	V(&sem);
+        V(&sem);
     }
 }
 
-void writer(void) 
+void writer(void)
 {
     int i;
 
     while (1) {
-	P(&wmutex);
-	for (i=0; i<N; i++)
-	    P(&sem);
-	V(&wmutex);
+        P(&wmutex);
+        for (i = 0; i < N; i++)
+            P(&sem);
+        V(&wmutex);
 
-	/* Critical section: */
-	/* Writing happens   */
+        /* Critical section: */
+        /* Writing happens   */
 
-	for (i=0; i<N; i++)
-	    V(&sem);
+        for (i = 0; i < N; i++)
+            V(&sem);
     }
 }
+
 /* $end rw3 */

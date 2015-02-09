@@ -8,7 +8,7 @@
 
 void add_int_option(char *name, int *var);
 void add_double_option(char *name, double *var);
-void add_string_option(char *name, char **var);     
+void add_string_option(char *name, char **var);
 
 /* Print usage information and exit */
 void usage(char *prog);
@@ -21,9 +21,7 @@ void usage(char *prog);
 int parse_options(int argc, char *argv[], char *otherargs[]);
 
 /* Parse options from file */
-void parse_option_file(char *prog, FILE *option_file);
+void parse_option_file(char *prog, FILE * option_file);
 
 /* Show which options are in effect */
-void show_options(FILE *outfile);
-
-
+void show_options(FILE * outfile);

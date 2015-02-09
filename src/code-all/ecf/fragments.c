@@ -4,21 +4,20 @@ void fragments()
 {
     int pid;
 
-/* $begin errorcheck */    
+/* $begin errorcheck */
     if ((pid = fork()) < 0) {
-	fprintf(stderr, "fork error: %s\n", strerror(errno));
-	exit(0);
+        fprintf(stderr, "fork error: %s\n", strerror(errno));
+        exit(0);
     }
-/* $end errorcheck */    
+/* $end errorcheck */
 
 /* $begin unixerroruse */
     if ((pid = fork()) < 0)
-	unix_error("fork error");
+        unix_error("fork error");
 /* $end unixerroruse */
 
-/* $begin forkwrapperuse */    
+/* $begin forkwrapperuse */
     pid = Fork();
-/* $end forkwrapperuse */    
+/* $end forkwrapperuse */
 
 }
-

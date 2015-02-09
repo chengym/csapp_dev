@@ -6,8 +6,9 @@
 int rand_r(unsigned int *nextp)
 {
     *nextp = *nextp * 1103515245 + 12345;
-    return (unsigned int)(*nextp / 65536) % 32768;
+    return (unsigned int) (*nextp / 65536) % 32768;
 }
+
 /* $end rand_r */
 
 int main()
@@ -19,4 +20,3 @@ int main()
     printf("%d\n", rand_r(&next));
     exit(0);
 }
-

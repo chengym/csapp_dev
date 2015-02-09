@@ -6,28 +6,29 @@
 
 /* $begin reader1 */
 /* Global variables */
-int readcnt;    /* Initially = 0 */
-sem_t mutex, w; /* Both initially = 1 */
+int readcnt;                    /* Initially = 0 */
+sem_t mutex, w;                 /* Both initially = 1 */
 
-void reader(void) 
+void reader(void)
 {
     while (1) {
-	P(&mutex);
-	readcnt++;
-	if (readcnt == 1) /* first in */
-	    P(&w);          
-	V(&mutex);          
+        P(&mutex);
+        readcnt++;
+        if (readcnt == 1)       /* first in */
+            P(&w);
+        V(&mutex);
 
-	/* Critical section */
-	/* Reading happens  */
+        /* Critical section */
+        /* Reading happens  */
 
-	P(&mutex);
-	readcnt--;
-	if (readcnt == 0) /* last out */
-	    V(&w);
-	V(&mutex);
+        P(&mutex);
+        readcnt--;
+        if (readcnt == 0)       /* last out */
+            V(&w);
+        V(&mutex);
     }
 }
+
 /* $end reader1 */
 
 /* $begin writer1 */
@@ -35,15 +36,16 @@ void reader(void)
 
 
 
-void writer(void) 
+void writer(void)
 {
     while (1) {
-	P(&w);
+        P(&w);
 
-	/* Critical section */
-	/* Writing happens  */ 
+        /* Critical section */
+        /* Writing happens  */
 
-	V(&w);
+        V(&w);
     }
 }
+
 /* $end writer1 */

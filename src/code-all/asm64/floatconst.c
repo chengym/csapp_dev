@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
+#define M_PI 3.14
 double circum(double radius)
 {
     return 2.0 * M_PI * radius;
@@ -19,8 +20,9 @@ double cel2fahr(double temp)
 {
     return 1.8 * temp + 32.0;
 }
+
 /* $end cel2fahr-c */
-     
+
 
 /* Decode decimal representation of PI */
 void decode(unsigned lo, unsigned hi)
@@ -28,7 +30,7 @@ void decode(unsigned lo, unsigned hi)
     unsigned exp = hi >> 20;
     unsigned hi_frac = hi - (exp << 20);
     unsigned long long frac = (1LL << 52) + ((long long) hi_frac << 32) + lo;
-    double frac_val = (double) frac / (double) (1LL<<52);
+    double frac_val = (double) frac / (double) (1LL << 52);
     double val = frac_val * (double) (1 << (exp - 1023));
     printf("lo = %u (0x%x)\n", lo, lo);
     printf("hi = %u (0x%x)\n", hi, hi);
@@ -44,8 +46,8 @@ int main(int argc, char *argv[])
     unsigned lo = 1413754136;
     unsigned hi = 1074340347;
     if (argc == 3) {
-	lo = strtoul(argv[1], NULL, 0);
-	hi = strtoul(argv[2], NULL, 0);
+        lo = strtoul(argv[1], NULL, 0);
+        hi = strtoul(argv[2], NULL, 0);
     }
     decode(lo, hi);
     return 0;

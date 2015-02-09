@@ -1,5 +1,6 @@
 	.file	"goodcnt.c"
 	.text
+	.p2align 4,,15
 	.globl	thread
 	.type	thread, @function
 thread:
@@ -11,27 +12,29 @@ thread:
 	pushq	%rbx
 	.cfi_def_cfa_offset 24
 	.cfi_offset 3, -24
+	xorl	%ebx, %ebx
 	subq	$8, %rsp
 	.cfi_def_cfa_offset 32
 	movl	(%rdi), %ebp
 	testl	%ebp, %ebp
-	jle	.L2
-	movl	$0, %ebx
-.L3:
+	jle	.L5
+	.p2align 4,,10
+	.p2align 3
+.L6:
 	movl	$mutex, %edi
+	addl	$1, %ebx
 	call	P
 	movl	cnt(%rip), %eax
+	movl	$mutex, %edi
 	addl	$1, %eax
 	movl	%eax, cnt(%rip)
-	movl	$mutex, %edi
 	call	V
-	addl	$1, %ebx
 	cmpl	%ebp, %ebx
-	jne	.L3
-.L2:
-	movl	$0, %eax
+	jne	.L6
+.L5:
 	addq	$8, %rsp
 	.cfi_def_cfa_offset 24
+	xorl	%eax, %eax
 	popq	%rbx
 	.cfi_def_cfa_offset 16
 	popq	%rbp
@@ -47,7 +50,8 @@ thread:
 	.string	"BOOM! cnt=%d\n"
 .LC2:
 	.string	"OK cnt=%d\n"
-	.text
+	.section	.text.startup,"ax",@progbits
+	.p2align 4,,15
 	.globl	main
 	.type	main, @function
 main:
@@ -56,60 +60,59 @@ main:
 	subq	$40, %rsp
 	.cfi_def_cfa_offset 48
 	cmpl	$2, %edi
-	je	.L6
+	je	.L10
 	movq	(%rsi), %rdx
-	movl	$.LC0, %esi
 	movl	$1, %edi
-	movl	$0, %eax
+	movl	$.LC0, %esi
+	xorl	%eax, %eax
 	call	__printf_chk
-	movl	$0, %edi
+	xorl	%edi, %edi
 	call	exit
-.L6:
+.L10:
 	movq	8(%rsi), %rdi
 	movl	$10, %edx
-	movl	$0, %esi
+	xorl	%esi, %esi
 	call	strtol
-	movl	%eax, 12(%rsp)
+	xorl	%esi, %esi
 	movl	$1, %edx
-	movl	$0, %esi
 	movl	$mutex, %edi
+	movl	%eax, 12(%rsp)
 	call	Sem_init
 	leaq	12(%rsp), %rcx
-	movl	$thread, %edx
-	movl	$0, %esi
 	leaq	16(%rsp), %rdi
+	xorl	%esi, %esi
+	movl	$thread, %edx
 	call	Pthread_create
 	leaq	12(%rsp), %rcx
-	movl	$thread, %edx
-	movl	$0, %esi
 	leaq	24(%rsp), %rdi
+	movl	$thread, %edx
+	xorl	%esi, %esi
 	call	Pthread_create
-	movl	$0, %esi
 	movq	16(%rsp), %rdi
+	xorl	%esi, %esi
 	call	Pthread_join
-	movl	$0, %esi
 	movq	24(%rsp), %rdi
+	xorl	%esi, %esi
 	call	Pthread_join
-	movl	cnt(%rip), %eax
 	movl	12(%rsp), %ecx
+	movl	cnt(%rip), %eax
 	leal	(%rcx,%rcx), %edx
 	cmpl	%eax, %edx
-	je	.L7
 	movl	cnt(%rip), %edx
+	je	.L11
 	movl	$.LC1, %esi
 	movl	$1, %edi
-	movl	$0, %eax
+	xorl	%eax, %eax
 	call	__printf_chk
-	jmp	.L8
-.L7:
-	movl	cnt(%rip), %edx
+.L12:
+	xorl	%edi, %edi
+	call	exit
+.L11:
 	movl	$.LC2, %esi
 	movl	$1, %edi
-	movl	$0, %eax
+	xorl	%eax, %eax
 	call	__printf_chk
-.L8:
-	movl	$0, %edi
-	call	exit
+	jmp	.L12
 	.cfi_endproc
 .LFE92:
 	.size	main, .-main

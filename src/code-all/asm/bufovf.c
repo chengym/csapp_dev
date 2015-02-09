@@ -40,7 +40,7 @@ char *strcpy(char *dest, const char *src)
 /* This is very low-quality code.
    It is intended to illustrate bad programming practices.
    See Problem SLASHrefLBRACKprob:asm:bufovfRBRACK. */
-char *getline()
+static char *_getline()
 {
     char buf[8];
     char *result;
@@ -54,6 +54,6 @@ char *getline()
 int main(int argc, char *argv[])
 {
    printf("Input>");
-   puts(getline());
+   puts(_getline());
    return 0;
 }

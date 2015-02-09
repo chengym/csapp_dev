@@ -1,8 +1,10 @@
 /* $begin linkerror */
 void foo(void);
 
-int main() {
+int main()
+{
     foo();
     return 0;
 }
+
 /* $end linkerror */

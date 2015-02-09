@@ -5,7 +5,7 @@
 #include "csapp.h"
 void *thread(void *vargp);
 
-int main() 
+int main()
 {
     pthread_t tid;
     Pthread_create(&tid, NULL, thread, NULL);
@@ -13,11 +13,12 @@ int main()
     exit(0);
 }
 
-void *thread(void *vargp) /* thread routine */
-{
+void *thread(void *vargp)
+{                               /* thread routine */
     Pthread_detach(pthread_self());
-    printf("Hello, world!\n"); 
-    while(1);
+    printf("Hello, world!\n");
+    while (1);
     return NULL;
 }
+
 /* $end hello */

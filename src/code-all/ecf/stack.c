@@ -5,11 +5,11 @@
 /* $begin environ */
 #include "csapp.h"
 
-int main(int argc, char **argv, char **envp) 
+int main(int argc, char **argv, char **envp)
 {
     int i;
 
-    /* addrs of argc, argv, argv[], environ, environ[] */ 
+    /* addrs of argc, argv, argv[], environ, environ[] */
     printf("&argc        = %p\n", &argc);
     printf("&argv        = %p\n", &argv);
     printf("&envp        = %p\n", &envp);
@@ -22,22 +22,22 @@ int main(int argc, char **argv, char **envp)
 
     /* argument list */
     printf("Argument list:\n");
-    i=0;
-    while (argv[i]) { 
-	printf("    %p: (%p) argv[%2d]: %s\n", 
-	       &argv[i], argv[i], i, argv[i]);
-	i++;
+    i = 0;
+    while (argv[i]) {
+        printf("    %p: (%p) argv[%2d]: %s\n", &argv[i], argv[i], i, argv[i]);
+        i++;
     }
 
     /* environment list */
     printf("Environment list:\n");
-    i=0;
+    i = 0;
     while (environ[i]) {
-	printf("    %p: (%p) environ[%2d]: %s\n", 
-	       &environ[i], environ[i], i, environ[i]);
-	i++;
+        printf("    %p: (%p) environ[%2d]: %s\n",
+               &environ[i], environ[i], i, environ[i]);
+        i++;
     }
 
     exit(0);
 }
+
 /* $end environ */

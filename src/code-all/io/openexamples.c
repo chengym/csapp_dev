@@ -11,13 +11,13 @@ int main()
 
     /* Open an existing file for appending */
     /* $begin openappend */
-    fd = Open("foo.txt", O_WRONLY|O_APPEND, 0);
+    fd = Open("foo.txt", O_WRONLY | O_APPEND, 0);
     /* $end openappend */
 
     /* Create a new file for writing */
     /* $begin opencreate */
     umask(DEF_UMASK);
-    fd = Open("foo.txt", O_CREAT|O_TRUNC|O_WRONLY, DEF_MODE);
+    fd = Open("foo.txt", O_CREAT | O_TRUNC | O_WRONLY, DEF_MODE);
     /* $end opencreate */
 
     printf("fd = %d\n", fd);

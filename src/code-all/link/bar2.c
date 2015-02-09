@@ -1,8 +1,9 @@
 /* $begin bar2 */
-/* bar2.c */ 
-int x = 15213; 
+/* bar2.c */
+int x = 15213;
 
-void f()  
-{ 
-} 
+void f()
+{
+}
+
 /* $end bar2 */

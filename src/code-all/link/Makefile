@@ -21,7 +21,7 @@ PROGS = p\
 	linkerror\
 
 # Do nothing
-all: 
+all: $(PROGS) 
 
 p: main.o swap.o
 	$(CC) $(CFLAGS) -o p main.o swap.o

@@ -1,0 +1,42 @@
+VERSION = 1.2.19
+BUILD_TIME    = $(shell date '+%y-%m-%d %R')
+CROSS_COMPILE =
+TOP := .
+
+# toolchain
+CROSS_COMPILE =
+CC            = $(CROSS_COMPILE)gcc
+CXX           = $(CROSS_COMPILE)g++
+AR            = $(CROSS_COMPILE)ar
+LD            = $(CROSS_COMPILE)ld
+NM            = $(CROSS_COMPILE)nm
+STRIP         = $(CROSS_COMPILE)strip
+OBJCOPY       = $(CROSS_COMPILE)objcopy
+OBJDUMP       = $(CROSS_COMPILE)objdump
+RANLIB        = $(CROSS_COMPILE)ranlib
+
+SHELL         = bash
+CP            = cp -fr
+MV            = mv
+RM            = rm -fr
+
+# If you dont want to see every executed command ...
+ifeq ($(VERBOSE), Y)
+.SILENT:
+endif
+
+CFLAGS        := -Wall -O2
+EXTRALIBS     := -lpthread -lm
+LDLIBS        := -lcsapp $(EXTRALIBS)
+OBJ_FILE      := *.o
+HOST_LIB      := /lib/x86_64-linux-gnu
+
+ifeq ($(CONFIG_64B), Y)
+    CFLAGS += -m64
+else
+    CFLAGS += -m32
+endif
+
+%.o: %.c
+	@echo CC $@
+	@$(CC) -c -o $*.o $(CFLAGS) $<

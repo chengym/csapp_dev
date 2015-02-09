@@ -21,4 +21,4 @@ $2 = 0x80483ed
 0x08048426 in main ()
 $3 = 0x8048426
 $4 = 0xffffce60
-[Inferior 1 (process 867) exited with code 04]
+[Inferior 1 (process 9218) exited with code 04]

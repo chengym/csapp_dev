@@ -9,24 +9,24 @@ int main()
     int i;
 
     for (i = 0; i < ITERS; i++) {
-	printf("Test %d\n", i);
-	fflush(stdout);
-	
-	/* Child */
-	if (Fork() == 0) {
-	    printf("C%d\n", i);
-	    fflush(stdout);
-	    exit(0);
-	}
+        printf("Test %d\n", i);
+        fflush(stdout);
 
-	/* Parent */
-	else { 
-	    printf("P%d\n", i);
-	    fflush(stdout);
-	}
-	fflush(stdout);
-	wait();
-	fflush(stdout);
+        /* Child */
+        if (Fork() == 0) {
+            printf("C%d\n", i);
+            fflush(stdout);
+            exit(0);
+        }
+
+        /* Parent */
+        else {
+            printf("P%d\n", i);
+            fflush(stdout);
+        }
+        fflush(stdout);
+        wait();
+        fflush(stdout);
     }
 
     printf("\n");

@@ -2,17 +2,17 @@
 
 void fragments()
 {
-    int sockfd=0;
+    int sockfd = 0;
 
-    /* $begin fulldupopen */     
+    /* $begin fulldupopen */
     FILE *fpin, *fpout;
 
     fpin = fdopen(sockfd, "r");
     fpout = fdopen(sockfd, "w");
-    /* $end fulldupopen */     
-    
-    /* $begin fulldupclose */     
+    /* $end fulldupopen */
+
+    /* $begin fulldupclose */
     fclose(fpin);
     fclose(fpout);
-    /* $end fulldupclose */     
+    /* $end fulldupclose */
 }

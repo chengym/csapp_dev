@@ -3,38 +3,48 @@
 # MOV instructions
 
 mov:
+# Quad word
+  /* $begin MOV-q-s */
+  movq $0x4050,%rax	# Immediate--Register
+  movq %rbp,%rsp  	# Register--Register
+  movq (%rdi,%rcx),%rax   # Memory--Register 
+  movq $-17,(%rsp)  	  # Immediate--Memory
+  movq %rax,-12(%rbp)  	  # Register--Memory
+  /* $end MOV-l-s */
+
+
 # Double word
-  /* $end MOV-l-s 0 */
+  /* $begin MOV-l-s */
   movl $0x4050,%eax	# Immediate--Register
   movl %ebp,%esp  	# Register--Register
-  movl (%edi,%ecx),%eax   # Memory--Register 
-  movl $-17,(%esp)  	  # Immediate--Memory
-  movl %eax,-12(%ebp)  	  # Register--Memory
-  /* $end MOV-l-s 0 */
+  movl (%rdi,%rdx),%eax   # Memory--Register 
+  movl $-17,(%rsp)  	  # Immediate--Memory
+  movl %eax,-12(%rbp)  	  # Register--Memory
+  /* $end MOV-l-s */
 
 # Word
-  /* $end MOV-w-s 0 */
+  /* $begin MOV-w-s */
   movw $0x4050,%ax	# Immediate--Register
   movw %bp,%sp			# Register--Register
-  movw (%edi,%ecx),%ax  	# Memory--Register 
-  movw $-17,(%esp)  		# Immediate--Memory
-  movw %ax,-12(%ebp)  		# Register--Memory
-  /* $end MOV-w-s 0 */
+  movw (%rdi,%rdx),%ax  	# Memory--Register 
+  movw $-17,(%rsp)  		# Immediate--Memory
+  movw %ax,-12(%rbp)  		# Register--Memory
+  /* $end MOV-w-s */
 
 # Byte
-  /* $end MOV-b-s 0 */
+  /* $begin MOV-b-s */
   movb $0x50,%ah    # Immediate--Register
   movb %bh,%bl		# Register--Register
-  movb (%edi,%ecx),%ah    # Memory--Register 
-  movb $-17,(%esp)  	  # Immediate--Memory
-  movb %al,-12(%ebp)  	  # Register--Memory
-  /* $end MOV-b-s 0 */
+  movb (%rdi,%rdx),%ah    # Memory--Register 
+  movb $-17,(%rsp)  	  # Immediate--Memory
+  movb %al,-12(%rbp)  	  # Register--Memory
+  /* $end MOV-b-s */
 
-movw16:
-# 16-bit addressing
-  movw (%bp),%ax	# Memory--Register 
-  movw $-17,(%bp)  	# Immediate--Memory
-  movw %ax,-12(%bp)  	# Register--Memory
+mov32:
+# 32-bit addressing
+  movw (%ebp),%ax	# Memory--Register 
+  movw $-17,(%ebp)  	# Immediate--Memory
+  movw %ax,-12(%ebp)  	# Register--Memory
 
 
 push:
@@ -42,9 +52,11 @@ push:
   /* $begin PUSH-s */
 # pushb %al 	   # Byte (Invalid)
   pushw %ax	     # Word
-  pushl %eax	       # Double word
-  pushw $0xFF	       	 # Word
-  pushl $0xFFFF		   # Double word
+#  pushl %eax	       # Double word
+  pushq %rax	       	 # Quad Word
+  pushw $0xFF		   # Word
+#  pushl $0xFFFF		     # Double word
+  pushq $0xFFFF		       # Quad word
   /* $end PUSH-s */
 
 pop:
@@ -52,15 +64,9 @@ pop:
   /* $begin POP-s */
 # popb %al  	  # Byte (Invalid)
   popw %ax	    # Word
-  popl %eax	      # Double word
+#  popl %eax	      # Double word
+  popq %rax	      	# Quad word
   /* $end POP-s */
-
-movsbl:
-# movsbl
-  /* $begin movsbl-s */
-  movsbl %bl,%esp	# Register--Register
-  movsbl (%edi,%ecx),%eax	# Memory--Register 
-  /* $end movsbl-s */
 
 movs:
 # MOVS
@@ -68,6 +74,9 @@ movs:
   movsbw %al,%bx
   movsbl %al,%edx
   movswl %ax,%edx
+  movsbq %al,%rbx
+  movswq %ax,%rbx
+  movslq %eax,%rbx
   /* $end MOVS-s */
 
 movz:
@@ -76,68 +85,95 @@ movz:
   movzbw %al,%bx
   movzbl %al,%edx
   movzwl %ax,%edx
+  movzbq %al,%rbx
+  movzwq %ax,%rbx
+#  movzlq %eax,%rbx  # invalid
+
   /* $end MOVZ-s */
 add:
+# Quad word
+  /* $begin ADD-q-s */
+  addq $0x4050,%rax	# Immediate--Register
+  addq %rbp,%rsp  	# Register--Register
+  addq (%rdi,%rdx),%rax   # Memory--Register 
+  addq $-17,(%rsp)  	  # Immediate--Memory
+  addq %rax,-12(%rbp)  	  # Register--Memory
+  /* $end ADD-q-s */
+
 # Double word
-  /* $end ADD-l-s 0 */
+  /* $begin ADD-l-s */
   addl $0x4050,%eax	# Immediate--Register
   addl %ebp,%esp  	# Register--Register
-  addl (%edi,%ecx),%eax   # Memory--Register 
-  addl $-17,(%esp)  	  # Immediate--Memory
-  addl %eax,-12(%ebp)  	  # Register--Memory
-  /* $end ADD-l-s 0 */
+  addl (%rdi,%rdx),%eax   # Memory--Register 
+  addl $-17,(%rsp)  	  # Immediate--Memory
+  addl %eax,-12(%rbp)  	  # Register--Memory
+  /* $end ADD-l-s */
 
 # Word
-  /* $end ADD-w-s 0 */
+  /* $begin ADD-w-s */
   addw $0x4050,%ax	# Immediate--Register
   addw %bp,%sp			# Register--Register
-  addw (%edi,%ecx),%ax  	# Memory--Register 
-  addw $-17,(%esp)  		# Immediate--Memory
-  addw %ax,-12(%ebp)  		# Register--Memory
-  /* $end ADD-w-s 0 */
+  addw (%rdi,%rdx),%ax  	# Memory--Register 
+  addw $-17,(%rsp)  		# Immediate--Memory
+  addw %ax,-12(%rbp)  		# Register--Memory
+  /* $end ADD-w-s */
 
 # Byte
-  /* $end ADD-b-s 0 */
+  /* $begin ADD-b-s */
   addb $0x50,%ah    # Immediate--Register
   addb %bh,%bl		# Register--Register
-  addb (%edi,%ecx),%ah    # Memory--Register 
-  addb $-17,(%esp)  	  # Immediate--Memory
-  addb %al,-12(%ebp)  	  # Register--Memory
-  /* $end ADD-b-s 0 */
+  addb (%rdi,%rdx),%ah    # Memory--Register 
+  addb $-17,(%rsp)  	  # Immediate--Memory
+  addb %al,-12(%rbp)  	  # Register--Memory
+  /* $end ADD-b-s */
 
 lea:
-	leaw 4(%eax,%edx,2),%bx
-	leal 4(%eax,%edx,2),%ebx
+	/* $begin LEA-s */
+	leaw 4(%rax,%rdx,2),%bx
+	leal 4(%rax,%rdx,2),%ebx
+	leaq 4(%rax,%rdx,2),%rbx
+	/* $end LEA-s */
 
-inc16:
-	incw (%bp)
+inc32:
+	incw (%ebp)
 
 inc:
 	incb %al
-	incb 4(%esp,%eax)
+	incb 4(%rsp,%rax)
 	incw %ax
-	incw 4(%esp,%eax)
+	incw 4(%rsp,%rax)
 	incl %eax
-	incl 4(%esp,%eax)
+	incl 4(%rsp,%rax)
+	incq %rax
+	incq 4(%rsp,%rax)
 
 shift:
 	salb %cl,%al
-	salb $0xFF,8(%esp,%edx,4)
+	salb $0xFF,8(%rsp,%rdx,4)
 	salw %cl,%ax
-	salw $0xFF,8(%esp,%edx,4)
+	salw $0xFF,8(%rsp,%rdx,4)
 	sall %cl,%eax
-	sall $0xFF,8(%esp,%edx,4)
+	sall $0xFF,8(%rsp,%rdx,4)
+	salq %cl,%rax
+	salq $0xFF,8(%rsp,%rdx,4)
 
 cmp:
-	cmpl $0,%eax
-	cmpw $0,(%eax)
-	cmpw %cx,(%eax)
 	cmpb %al,%ah
-	cmpb (%eax),%cl
+	cmpb (%rax),%cl
+	cmpw $0,(%rax)
+	cmpw %cx,(%rax)
+	cmpl $0,%eax
+	cmpl %eax,(%rax)
+	cmpq $0,%rax
+	cmpq %rax,(%rax)
 
 test:
-	testl $0,%eax
-	testw $0,(%eax)
-	testw %cx,(%eax)
 	testb %ah,%al
-	testb (%eax),%cl
+	testb (%rax),%cl
+	testw $0,(%rax)
+	testw %cx,(%rax)
+	testl $0,%eax
+	testl %eax,(%rax)
+	testq $0,%rax
+	testq %rax,(%rax)
+

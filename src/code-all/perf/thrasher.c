@@ -5,10 +5,10 @@ int sink[BSIZE];
 
 int main(int argc, char *argv[])
 {
-  while (1) {
-    int i;
-    for (i = 0; i < BSIZE; i++)
-      sink[i] = 3.0;
-  }
-  return 0;
+    while (1) {
+        int i;
+        for (i = 0; i < BSIZE; i++)
+            sink[i] = 3.0;
+    }
+    return 0;
 }

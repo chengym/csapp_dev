@@ -1,4 +1,5 @@
-CC42 = /usr/bin/gcc-4.2
+#CC42 = /usr/bin/gcc-4.2
+CC42 = gcc
 CC = gcc
 CFLAGS= -O1 -Wall 
 OPTCFLAGS = -O3 -Wall
@@ -12,7 +13,7 @@ CSAPPLIB64 = $(CSAPP2DIR)/lib/libcsapp64.a
 #IDENTIFY = ../../bin/identify.pl
 #MACHINE = `$(IDENTIFY)`
 
-EXTRACT = ./exbytes.pl
+EXTRACT = perl ./exbytes.pl
 
 F32 =-m32
 F32c = -m32 -march=i686 -msse2 -mfpmath=sse

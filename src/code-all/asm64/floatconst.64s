@@ -1,0 +1,220 @@
+	.file	"floatconst.c"
+	.text
+	.p2align 4,,15
+	.globl	circum
+	.type	circum, @function
+circum:
+.LFB26:
+	.cfi_startproc
+	mulsd	.LC0(%rip), %xmm0
+	ret
+	.cfi_endproc
+.LFE26:
+	.size	circum, .-circum
+	.p2align 4,,15
+	.globl	area
+	.type	area, @function
+area:
+.LFB27:
+	.cfi_startproc
+	movsd	.LC1(%rip), %xmm1
+	mulsd	%xmm0, %xmm1
+	mulsd	%xmm0, %xmm1
+	movapd	%xmm1, %xmm0
+	ret
+	.cfi_endproc
+.LFE27:
+	.size	area, .-area
+	.p2align 4,,15
+	.globl	cel2fahr
+	.type	cel2fahr, @function
+cel2fahr:
+.LFB28:
+	.cfi_startproc
+	mulsd	.LC2(%rip), %xmm0
+	addsd	.LC3(%rip), %xmm0
+	ret
+	.cfi_endproc
+.LFE28:
+	.size	cel2fahr, .-cel2fahr
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.LC5:
+	.string	"lo = %u (0x%x)\n"
+.LC6:
+	.string	"hi = %u (0x%x)\n"
+.LC7:
+	.string	"exp = %d (0x%x)\n"
+.LC8:
+	.string	"hi_frac = %d (0x%x)\n"
+.LC9:
+	.string	"frac = %llu (0x%llx)\n"
+.LC10:
+	.string	"frac_val = %.15g\n"
+.LC11:
+	.string	"val = %.15g\n"
+	.text
+	.p2align 4,,15
+	.globl	decode
+	.type	decode, @function
+decode:
+.LFB29:
+	.cfi_startproc
+	pushq	%r13
+	.cfi_def_cfa_offset 16
+	.cfi_offset 13, -16
+	movabsq	$4503599627370496, %rax
+	movl	%esi, %r13d
+	shrl	$20, %r13d
+	movl	%edi, %edx
+	pushq	%r12
+	.cfi_def_cfa_offset 24
+	.cfi_offset 12, -24
+	movl	%esi, %r12d
+	andl	$1048575, %r12d
+	movq	%r12, %rcx
+	pushq	%rbp
+	.cfi_def_cfa_offset 32
+	.cfi_offset 6, -32
+	salq	$32, %rcx
+	addq	%rax, %rcx
+	movl	%edi, %eax
+	pushq	%rbx
+	.cfi_def_cfa_offset 40
+	.cfi_offset 3, -40
+	leaq	(%rcx,%rax), %rbp
+	leal	-1023(%r13), %ecx
+	movl	$1, %eax
+	subq	$24, %rsp
+	.cfi_def_cfa_offset 64
+	movl	%esi, %ebx
+	movl	$.LC5, %esi
+	cvtsi2sdq	%rbp, %xmm0
+	sall	%cl, %eax
+	cvtsi2sd	%eax, %xmm1
+	movl	%edi, %ecx
+	xorl	%eax, %eax
+	movl	$1, %edi
+	mulsd	.LC4(%rip), %xmm0
+	mulsd	%xmm0, %xmm1
+	movsd	%xmm0, 8(%rsp)
+	movsd	%xmm1, (%rsp)
+	call	__printf_chk
+	movl	%ebx, %ecx
+	movl	%ebx, %edx
+	movl	$.LC6, %esi
+	movl	$1, %edi
+	xorl	%eax, %eax
+	call	__printf_chk
+	movl	%r13d, %ecx
+	movl	%r13d, %edx
+	movl	$.LC7, %esi
+	movl	$1, %edi
+	xorl	%eax, %eax
+	call	__printf_chk
+	movl	%r12d, %ecx
+	movl	%r12d, %edx
+	movl	$.LC8, %esi
+	movl	$1, %edi
+	xorl	%eax, %eax
+	call	__printf_chk
+	movq	%rbp, %rcx
+	movq	%rbp, %rdx
+	movl	$.LC9, %esi
+	movl	$1, %edi
+	xorl	%eax, %eax
+	call	__printf_chk
+	movsd	8(%rsp), %xmm0
+	movl	$.LC10, %esi
+	movl	$1, %edi
+	movl	$1, %eax
+	call	__printf_chk
+	movsd	(%rsp), %xmm1
+	addq	$24, %rsp
+	.cfi_def_cfa_offset 40
+	popq	%rbx
+	.cfi_def_cfa_offset 32
+	popq	%rbp
+	.cfi_def_cfa_offset 24
+	popq	%r12
+	.cfi_def_cfa_offset 16
+	popq	%r13
+	.cfi_def_cfa_offset 8
+	movapd	%xmm1, %xmm0
+	movl	$.LC11, %esi
+	movl	$1, %edi
+	movl	$1, %eax
+	jmp	__printf_chk
+	.cfi_endproc
+.LFE29:
+	.size	decode, .-decode
+	.section	.text.startup,"ax",@progbits
+	.p2align 4,,15
+	.globl	main
+	.type	main, @function
+main:
+.LFB30:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsi, %rbp
+	movl	$1074340347, %esi
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	.cfi_offset 3, -24
+	movl	$1413754136, %ebx
+	subq	$8, %rsp
+	.cfi_def_cfa_offset 32
+	cmpl	$3, %edi
+	je	.L13
+.L9:
+	movl	%ebx, %edi
+	call	decode
+	addq	$8, %rsp
+	.cfi_remember_state
+	.cfi_def_cfa_offset 24
+	xorl	%eax, %eax
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%rbp
+	.cfi_def_cfa_offset 8
+	ret
+.L13:
+	.cfi_restore_state
+	movq	8(%rbp), %rdi
+	xorl	%edx, %edx
+	xorl	%esi, %esi
+	call	strtoul
+	movq	16(%rbp), %rdi
+	xorl	%esi, %esi
+	xorl	%edx, %edx
+	movl	%eax, %ebx
+	call	strtoul
+	movl	%eax, %esi
+	jmp	.L9
+	.cfi_endproc
+.LFE30:
+	.size	main, .-main
+	.section	.rodata.cst8,"aM",@progbits,8
+	.align 8
+.LC0:
+	.long	1374389535
+	.long	1075388088
+	.align 8
+.LC1:
+	.long	1374389535
+	.long	1074339512
+	.align 8
+.LC2:
+	.long	3435973837
+	.long	1073532108
+	.align 8
+.LC3:
+	.long	0
+	.long	1077936128
+	.align 8
+.LC4:
+	.long	0
+	.long	1018167296
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

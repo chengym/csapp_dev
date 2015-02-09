@@ -6,16 +6,16 @@
 
 int tps()
 {
-  clock_t tstart;
-  struct tms t;
-  tstart = times(&t);
-  sleep(1);
-  return (int) (times(&t)-tstart);
+    clock_t tstart;
+    struct tms t;
+    tstart = times(&t);
+    sleep(1);
+    return (int) (times(&t) - tstart);
 }
 
 
 int main(int argc, char *argv[])
 {
-  printf("%d ticks/second\n", tps());
-  return 0;
+    printf("%d ticks/second\n", tps());
+    return 0;
 }

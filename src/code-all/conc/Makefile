@@ -1,16 +1,14 @@
-CC = gcc
+ROOT = ../../..
+include $(ROOT)/build/config
+include $(ROOT)/build/Make.rules
 
 CSAPP_INC = ../include
-CSAPP_SRC = ../src
 
-CFLAGS = -O1 -Wall -I $(CSAPP_INC) -I .
-LDLIBS = -lpthread -lm
+CFLAGS += -I$(CSAPP_INC) -I.
 
-COUNTERARGS = -O1 -Wall -I $(CSAPP_INC)
-
-# NOTE: we expect sharing.c to generate warnings
-PROGS =	hello\
+PROGS =	\
 	badcnt\
+	hello \
 	goodcnt\
 	echoclient\
 	echoserveri\
@@ -34,24 +32,16 @@ PROGS =	hello\
 	rw0.o\
 	rw1.o\
 	rw2.o\
-	rw3.o\
+	rw3.o
 
-all: $(CSAPP_SRC)/csapp.o $(PROGS)
-$(PROGS): $(CSAPP_SRC)/csapp.o 
-$(CSAPP_SRC)/csapp.o: $(CSAPP_SRC)/csapp.c $(CSAPP_INC)/csapp.h
+all: $(PROGS)
 
-# The two programs that we use to illustrate synchronization
-goodcnt: goodcnt.c 
-	$(CC) $(COUNTERARGS) -o goodcnt goodcnt.c $(CSAPP_SRC)/csapp.o -lpthread
-	$(CC) $(COUNTERARGS) -S goodcnt.c
-
-badcnt: badcnt.c
-	$(CC) $(COUNTERARGS) -o badcnt badcnt.c $(CSAPP_SRC)/csapp.o -lpthread
-	$(CC) $(COUNTERARGS) -S badcnt.c
-
-# Programs that need more than one .o file
 echoserveri: echoserveri.o echo.o
+	@$(CC) $^ $(LDLIBS) -o $@
+
 echoserverp: echoserverp.o echo.o
+	@$(CC) $^ $(LDLIBS) -o $@
+
 echoservert: echoservert.o echo.o
 echoservert_cnt: echoservert_cnt.o echo_cnt.o
 echoservert_pre: echoservert_pre.o echo_cnt.o sbuf.o

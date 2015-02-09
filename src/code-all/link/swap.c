@@ -5,7 +5,7 @@ extern int buf[];
 int *bufp0 = &buf[0];
 int *bufp1;
 
-void swap() 
+void swap()
 {
     int temp;
 
@@ -14,5 +14,5 @@ void swap()
     *bufp0 = *bufp1;
     *bufp1 = temp;
 }
-/* $end swap */
 
+/* $end swap */

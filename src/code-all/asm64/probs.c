@@ -24,7 +24,7 @@ int arithprob(int a, char b, long c, int d);
 int arithprob(int a, char b, long c, int d)
 {
     /* $begin arithprob-body-c */
-    return a*b + c*d;
+    return a * b + c * d;
     /* $end arithprob-body-c */
 }
 
@@ -41,4 +41,5 @@ void moveprob(char v1, int v2, unsigned char v3, unsigned v4)
     gv3 = (unsigned long) v3;
     gv4 = (unsigned long) v4;
 }
+
 /* $end movprob-c */

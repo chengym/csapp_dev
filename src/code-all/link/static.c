@@ -1,14 +1,14 @@
 /* $begin static */
-int f() 
+int f()
 {
     static int x = 0;
     return x;
-}   
+}
 
-int g() 
+int g()
 {
-    static int x = 1;      
+    static int x = 1;
     return x;
 }
-/* $end static */
 
+/* $end static */
