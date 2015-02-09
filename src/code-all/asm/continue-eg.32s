@@ -1,0 +1,83 @@
+	.file	"continue-eg.c"
+	.text
+	.globl	loop1
+	.type	loop1, @function
+loop1:
+.LFB0:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	$0, %edx
+	movl	$0, %eax
+.L4:
+	movl	%edx, %ebx
+	andl	$1, %ebx
+	leal	(%eax,%edx), %ecx
+	testl	%ebx, %ebx
+	cmove	%ecx, %eax
+	addl	$1, %edx
+	cmpl	$10, %edx
+	jne	.L4
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	loop1, .-loop1
+	.globl	loop2
+	.type	loop2, @function
+loop2:
+.LFB1:
+	.cfi_startproc
+	movl	$0, %edx
+	movl	$0, %eax
+	jmp	.L7
+.L10:
+.L8:
+	jmp	.L8
+.L12:
+	addl	%edx, %eax
+	addl	$1, %edx
+	cmpl	$10, %edx
+	je	.L9
+.L7:
+	testb	$1, %dl
+	jne	.L10
+	jmp	.L12
+.L9:
+	.p2align 4,,8
+	rep ret
+	.cfi_endproc
+.LFE1:
+	.size	loop2, .-loop2
+	.globl	loop32
+	.type	loop32, @function
+loop32:
+.LFB2:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	$0, %edx
+	movl	$0, %eax
+.L16:
+	movl	%edx, %ebx
+	andl	$1, %ebx
+	leal	(%eax,%edx), %ecx
+	testl	%ebx, %ebx
+	cmove	%ecx, %eax
+.L14:
+	addl	$1, %edx
+	cmpl	$10, %edx
+	jne	.L16
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	loop32, .-loop32
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

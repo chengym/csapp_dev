@@ -1,0 +1,125 @@
+	.file	"incr.c"
+	.text
+	.p2align 4,,15
+	.globl	simple
+	.type	simple, @function
+simple:
+.LFB23:
+	.cfi_startproc
+	movl	(%rdi), %eax
+	addl	%esi, %eax
+	movl	%eax, (%rdi)
+	ret
+	.cfi_endproc
+.LFE23:
+	.size	simple, .-simple
+	.p2align 4,,15
+	.globl	simple_l
+	.type	simple_l, @function
+simple_l:
+.LFB24:
+	.cfi_startproc
+	movq	%rsi, %rax
+	addq	(%rdi), %rax
+	movq	%rax, (%rdi)
+	ret
+	.cfi_endproc
+.LFE24:
+	.size	simple_l, .-simple_l
+	.p2align 4,,15
+	.globl	call_simple
+	.type	call_simple, @function
+call_simple:
+.LFB25:
+	.cfi_startproc
+	movl	$98, %eax
+	ret
+	.cfi_endproc
+.LFE25:
+	.size	call_simple, .-call_simple
+	.p2align 4,,15
+	.globl	call_simple_l
+	.type	call_simple_l, @function
+call_simple_l:
+.LFB26:
+	.cfi_startproc
+	movq	gval1(%rip), %rax
+	addq	$12, %rax
+	movq	%rax, gval1(%rip)
+	addq	gval2(%rip), %rax
+	ret
+	.cfi_endproc
+.LFE26:
+	.size	call_simple_l, .-call_simple_l
+	.p2align 4,,15
+	.globl	post_incr
+	.type	post_incr, @function
+post_incr:
+.LFB27:
+	.cfi_startproc
+	movl	(%rdi), %eax
+	addl	%eax, %esi
+	movl	%esi, (%rdi)
+	ret
+	.cfi_endproc
+.LFE27:
+	.size	post_incr, .-post_incr
+	.p2align 4,,15
+	.globl	post_incr_l
+	.type	post_incr_l, @function
+post_incr_l:
+.LFB28:
+	.cfi_startproc
+	movq	(%rdi), %rax
+	addq	%rax, %rsi
+	movq	%rsi, (%rdi)
+	ret
+	.cfi_endproc
+.LFE28:
+	.size	post_incr_l, .-post_incr_l
+	.section	.text.startup,"ax",@progbits
+	.p2align 4,,15
+	.globl	main
+	.type	main, @function
+main:
+.LFB30:
+	.cfi_startproc
+	pushq	%rbx
+	.cfi_def_cfa_offset 16
+	.cfi_offset 3, -16
+	xorl	%ebx, %ebx
+	.p2align 4,,10
+	.p2align 3
+.L9:
+	xorl	%eax, %eax
+	call	random
+	movl	%eax, val(%rbx)
+	cltq
+	movq	%rax, val_l(%rbx,%rbx)
+	addq	$4, %rbx
+	cmpq	$2048, %rbx
+	jne	.L9
+	xorl	%eax, %eax
+	popq	%rbx
+	.cfi_def_cfa_offset 8
+	ret
+	.cfi_endproc
+.LFE30:
+	.size	main, .-main
+	.comm	val_l,4096,32
+	.comm	val,2048,32
+	.globl	gval2
+	.data
+	.align 8
+	.type	gval2, @object
+	.size	gval2, 8
+gval2:
+	.quad	763
+	.globl	gval1
+	.align 8
+	.type	gval1, @object
+	.size	gval1, 8
+gval1:
+	.quad	567
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

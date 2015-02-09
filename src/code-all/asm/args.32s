@@ -1,0 +1,20 @@
+	.file	"args.c"
+	.text
+	.globl	fun
+	.type	fun, @function
+fun:
+.LFB0:
+	.cfi_startproc
+	movsbl	8(%esp), %edx
+	movl	12(%esp), %eax
+	movl	%edx, (%eax)
+	movswl	4(%esp), %eax
+	movl	16(%esp), %ecx
+	subl	%eax, %ecx
+	movl	%ecx, %eax
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	fun, .-fun
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

@@ -1,0 +1,116 @@
+	.file	"cc.c"
+	.text
+	.globl	comp
+	.type	comp, @function
+comp:
+.LFB0:
+	.cfi_startproc
+	movl	4(%esp), %edx
+	movl	8(%esp), %eax
+	movl	%edx, x
+	movl	%eax, y
+	cmpl	%eax, %edx
+	setl	%al
+	movzbl	%al, %eax
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	comp, .-comp
+	.globl	ge
+	.type	ge, @function
+ge:
+.LFB1:
+	.cfi_startproc
+	movl	4(%esp), %edx
+	movl	8(%esp), %eax
+	movzbl	%dl, %ecx
+	movl	%ecx, x
+	movzbl	%al, %ecx
+	movl	%ecx, y
+	cmpb	%al, %dl
+	setae	%al
+	movzbl	%al, %eax
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	ge, .-ge
+	.globl	ne
+	.type	ne, @function
+ne:
+.LFB2:
+	.cfi_startproc
+	movl	4(%esp), %edx
+	movl	8(%esp), %eax
+	movswl	%dx, %ecx
+	movl	%ecx, x
+	movswl	%ax, %ecx
+	movl	%ecx, y
+	cmpw	%ax, %dx
+	setne	%al
+	movzbl	%al, %eax
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	ne, .-ne
+	.globl	eq
+	.type	eq, @function
+eq:
+.LFB3:
+	.cfi_startproc
+	movl	4(%esp), %edx
+	movl	8(%esp), %eax
+	movl	%edx, x
+	movl	%eax, y
+	cmpl	%eax, %edx
+	sete	%al
+	movzbl	%al, %eax
+	ret
+	.cfi_endproc
+.LFE3:
+	.size	eq, .-eq
+	.globl	test
+	.type	test, @function
+test:
+.LFB4:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	movl	%eax, x
+	testl	%eax, %eax
+	setne	%al
+	movzbl	%al, %eax
+	ret
+	.cfi_endproc
+.LFE4:
+	.size	test, .-test
+	.globl	test_eq
+	.type	test_eq, @function
+test_eq:
+.LFB5:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	movswl	%ax, %edx
+	movl	%edx, x
+	testw	%ax, %ax
+	sete	%al
+	movzbl	%al, %eax
+	ret
+	.cfi_endproc
+.LFE5:
+	.size	test_eq, .-test_eq
+	.globl	test_ge
+	.type	test_ge, @function
+test_ge:
+.LFB6:
+	.cfi_startproc
+	movsbl	4(%esp), %eax
+	movl	%eax, x
+	notl	%eax
+	shrl	$31, %eax
+	ret
+	.cfi_endproc
+.LFE6:
+	.size	test_ge, .-test_ge
+	.comm	y,4,4
+	.comm	x,4,4
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

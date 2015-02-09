@@ -1,0 +1,25 @@
+	.file	"floatcvt.c"
+	.text
+	.p2align 4,,15
+	.globl	fcvt
+	.type	fcvt, @function
+fcvt:
+.LFB0:
+	.cfi_startproc
+	movsd	(%rdx), %xmm1
+	movq	(%rcx), %rax
+	movss	(%rsi), %xmm0
+	cvttsd2siq	%xmm1, %r8
+	unpcklps	%xmm0, %xmm0
+	cvtsi2ss	%edi, %xmm1
+	cvtps2pd	%xmm0, %xmm0
+	movq	%r8, (%rcx)
+	movss	%xmm1, (%rsi)
+	cvtsi2sdq	%rax, %xmm1
+	movsd	%xmm1, (%rdx)
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	fcvt, .-fcvt
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

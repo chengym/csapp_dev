@@ -1,0 +1,42 @@
+	.file	"union.c"
+	.text
+	.globl	float2bit
+	.type	float2bit, @function
+float2bit:
+.LFB0:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	float2bit, .-float2bit
+	.globl	copy
+	.type	copy, @function
+copy:
+.LFB1:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	copy, .-copy
+	.globl	bit2double
+	.type	bit2double, @function
+bit2double:
+.LFB2:
+	.cfi_startproc
+	subl	$12, %esp
+	.cfi_def_cfa_offset 16
+	movl	16(%esp), %eax
+	movl	%eax, (%esp)
+	movl	20(%esp), %eax
+	movl	%eax, 4(%esp)
+	fldl	(%esp)
+	addl	$12, %esp
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	bit2double, .-bit2double
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

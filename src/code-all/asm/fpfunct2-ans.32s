@@ -1,0 +1,20 @@
+	.file	"fpfunct2-ans.c"
+	.text
+	.globl	funct2
+	.type	funct2, @function
+funct2:
+.LFB0:
+	.cfi_startproc
+	fildl	4(%esp)
+	flds	16(%esp)
+	faddl	8(%esp)
+	fdivrp	%st, %st(1)
+	fld1
+	fadds	20(%esp)
+	fsubrp	%st, %st(1)
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	funct2, .-funct2
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

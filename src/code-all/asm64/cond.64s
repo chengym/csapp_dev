@@ -1,0 +1,222 @@
+	.file	"cond.c"
+	.text
+	.p2align 4,,15
+	.globl	max
+	.type	max, @function
+max:
+.LFB0:
+	.cfi_startproc
+	cmpl	%esi, %edi
+	movl	%esi, %eax
+	cmovge	%edi, %eax
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	max, .-max
+	.p2align 4,,15
+	.globl	wa_max
+	.type	wa_max, @function
+wa_max:
+.LFB1:
+	.cfi_startproc
+	leal	17(%rsi), %eax
+	leal	23(%rdi), %edx
+	cmpl	%esi, %edi
+	cmovge	%edx, %eax
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	wa_max, .-wa_max
+	.p2align 4,,15
+	.globl	wm_max
+	.type	wm_max, @function
+wm_max:
+.LFB2:
+	.cfi_startproc
+	cmpl	%esi, %edi
+	jl	.L9
+	movl	%edi, %eax
+	movl	$23, %edx
+	imull	%edx, %eax
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L9:
+	movl	%esi, %eax
+	sall	$4, %eax
+	addl	%esi, %eax
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	wm_max, .-wm_max
+	.p2align 4,,15
+	.globl	wm_max2
+	.type	wm_max2, @function
+wm_max2:
+.LFB3:
+	.cfi_startproc
+	movl	%esi, %eax
+	sall	$4, %eax
+	cmpl	%esi, %edi
+	cmovge	%edi, %eax
+	ret
+	.cfi_endproc
+.LFE3:
+	.size	wm_max2, .-wm_max2
+	.p2align 4,,15
+	.globl	wm_max3
+	.type	wm_max3, @function
+wm_max3:
+.LFB4:
+	.cfi_startproc
+	cmpl	%esi, %edi
+	movl	%edi, %eax
+	jge	.L14
+	movl	%esi, %eax
+	sall	$4, %eax
+	addl	%esi, %eax
+.L14:
+	rep ret
+	.cfi_endproc
+.LFE4:
+	.size	wm_max3, .-wm_max3
+	.p2align 4,,15
+	.globl	abs
+	.type	abs, @function
+abs:
+.LFB5:
+	.cfi_startproc
+	movl	%edi, %edx
+	movl	%edi, %eax
+	sarl	$31, %edx
+	xorl	%edx, %eax
+	subl	%edx, %eax
+	ret
+	.cfi_endproc
+.LFE5:
+	.size	abs, .-abs
+	.p2align 4,,15
+	.globl	cmul
+	.type	cmul, @function
+cmul:
+.LFB6:
+	.cfi_startproc
+	imull	%esi, %edi
+	xorl	%eax, %eax
+	testl	%esi, %esi
+	cmovne	%edi, %eax
+	ret
+	.cfi_endproc
+.LFE6:
+	.size	cmul, .-cmul
+	.p2align 4,,15
+	.globl	cmul2
+	.type	cmul2, @function
+cmul2:
+.LFB7:
+	.cfi_startproc
+	cmpl	$1, %esi
+	movl	%edi, %eax
+	je	.L22
+	imull	%esi, %eax
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L22:
+	rep ret
+	.cfi_endproc
+.LFE7:
+	.size	cmul2, .-cmul2
+	.p2align 4,,15
+	.globl	cdiv
+	.type	cdiv, @function
+cdiv:
+.LFB8:
+	.cfi_startproc
+	xorl	%eax, %eax
+	testl	%esi, %esi
+	je	.L24
+	movl	%edi, %eax
+	cltd
+	idivl	%esi
+.L24:
+	rep ret
+	.cfi_endproc
+.LFE8:
+	.size	cdiv, .-cdiv
+	.p2align 4,,15
+	.globl	cdiv2
+	.type	cdiv2, @function
+cdiv2:
+.LFB9:
+	.cfi_startproc
+	cmpl	$1, %esi
+	movl	%edi, %eax
+	je	.L29
+	cltd
+	idivl	%esi
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L29:
+	rep ret
+	.cfi_endproc
+.LFE9:
+	.size	cdiv2, .-cdiv2
+	.p2align 4,,15
+	.globl	cread
+	.type	cread, @function
+cread:
+.LFB10:
+	.cfi_startproc
+	testq	%rdi, %rdi
+	je	.L32
+	movl	(%rdi), %eax
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L32:
+	xorl	%eax, %eax
+	ret
+	.cfi_endproc
+.LFE10:
+	.size	cread, .-cread
+	.p2align 4,,15
+	.globl	se_max
+	.type	se_max, @function
+se_max:
+.LFB11:
+	.cfi_startproc
+	cmpl	%esi, %edi
+	movl	%edi, %eax
+	jge	.L34
+	addl	$1, lcount(%rip)
+	movl	%esi, %eax
+.L34:
+	rep ret
+	.cfi_endproc
+.LFE11:
+	.size	se_max, .-se_max
+	.p2align 4,,15
+	.globl	arith
+	.type	arith, @function
+arith:
+.LFB12:
+	.cfi_startproc
+	leal	3(%rdi), %eax
+	testl	%edi, %edi
+	cmovns	%edi, %eax
+	sarl	$2, %eax
+	ret
+	.cfi_endproc
+.LFE12:
+	.size	arith, .-arith
+	.globl	lcount
+	.bss
+	.align 4
+	.type	lcount, @object
+	.size	lcount, 4
+lcount:
+	.zero	4
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

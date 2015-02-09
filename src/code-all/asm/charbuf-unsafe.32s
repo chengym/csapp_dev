@@ -1,0 +1,144 @@
+	.file	"charbuf-unsafe.c"
+	.text
+	.globl	len
+	.type	len, @function
+len:
+.LFB61:
+	.cfi_startproc
+	pushl	%edi
+	.cfi_def_cfa_offset 8
+	.cfi_offset 7, -8
+	movl	8(%esp), %edi
+	movl	$0, %eax
+	movl	$-1, %ecx
+	repnz scasb
+	notl	%ecx
+	leal	-1(%ecx), %eax
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE61:
+	.size	len, .-len
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.LC0:
+	.string	"%d"
+	.text
+	.globl	iptoa
+	.type	iptoa, @function
+iptoa:
+.LFB62:
+	.cfi_startproc
+	subl	$44, %esp
+	.cfi_def_cfa_offset 48
+	movl	52(%esp), %eax
+	movl	(%eax), %eax
+	movl	%eax, 16(%esp)
+	movl	$.LC0, 12(%esp)
+	movl	$-1, 8(%esp)
+	movl	$1, 4(%esp)
+	movl	48(%esp), %eax
+	movl	%eax, (%esp)
+	call	__sprintf_chk
+	addl	$44, %esp
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE62:
+	.size	iptoa, .-iptoa
+	.globl	intlen
+	.type	intlen, @function
+intlen:
+.LFB63:
+	.cfi_startproc
+	pushl	%edi
+	.cfi_def_cfa_offset 8
+	.cfi_offset 7, -8
+	subl	$40, %esp
+	.cfi_def_cfa_offset 48
+	movl	48(%esp), %eax
+	movl	%eax, 28(%esp)
+	leal	28(%esp), %eax
+	movl	%eax, 4(%esp)
+	leal	16(%esp), %edi
+	movl	%edi, (%esp)
+	call	iptoa
+	movl	$0, %eax
+	movl	$-1, %ecx
+	repnz scasb
+	notl	%ecx
+	leal	-1(%ecx), %eax
+	addl	$40, %esp
+	.cfi_def_cfa_offset 8
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE63:
+	.size	intlen, .-intlen
+	.globl	itoa
+	.type	itoa, @function
+itoa:
+.LFB64:
+	.cfi_startproc
+	subl	$44, %esp
+	.cfi_def_cfa_offset 48
+	movl	52(%esp), %eax
+	movl	%eax, 16(%esp)
+	movl	$.LC0, 12(%esp)
+	movl	$-1, 8(%esp)
+	movl	$1, 4(%esp)
+	movl	48(%esp), %eax
+	movl	%eax, (%esp)
+	call	__sprintf_chk
+	addl	$44, %esp
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE64:
+	.size	itoa, .-itoa
+	.globl	storeint
+	.type	storeint, @function
+storeint:
+.LFB65:
+	.cfi_startproc
+	movl	8(%esp), %eax
+	movl	4(%esp), %edx
+	movl	%edx, (%eax)
+	ret
+	.cfi_endproc
+.LFE65:
+	.size	storeint, .-storeint
+	.globl	intlen2
+	.type	intlen2, @function
+intlen2:
+.LFB66:
+	.cfi_startproc
+	pushl	%edi
+	.cfi_def_cfa_offset 8
+	.cfi_offset 7, -8
+	subl	$40, %esp
+	.cfi_def_cfa_offset 48
+	movl	48(%esp), %eax
+	movl	%eax, 4(%esp)
+	leal	20(%esp), %edi
+	movl	%edi, (%esp)
+	call	itoa
+	movl	$0, %eax
+	movl	$-1, %ecx
+	repnz scasb
+	notl	%ecx
+	leal	-1(%ecx), %eax
+	addl	$40, %esp
+	.cfi_def_cfa_offset 8
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE66:
+	.size	intlen2, .-intlen2
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

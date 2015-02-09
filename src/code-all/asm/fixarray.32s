@@ -1,0 +1,25 @@
+	.file	"fixarray.c"
+	.text
+	.globl	sum_element
+	.type	sum_element, @function
+sum_element:
+.LFB0:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	movl	8(%esp), %edx
+	leal	0(,%eax,8), %ecx
+	subl	%eax, %ecx
+	addl	%edx, %ecx
+	leal	(%edx,%edx,4), %edx
+	addl	%edx, %eax
+	movl	mat1(,%ecx,4), %edx
+	addl	mat2(,%eax,4), %edx
+	movl	%edx, %eax
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	sum_element, .-sum_element
+	.comm	mat2,140,32
+	.comm	mat1,140,32
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

@@ -1,0 +1,39 @@
+	.file	"branch.c"
+	.text
+	.globl	silly
+	.type	silly, @function
+silly:
+.LFB0:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	testl	%eax, %eax
+	jle	.L2
+.L3:
+	movl	%eax, %edx
+	sarl	%edx
+	subl	%edx, %eax
+	leal	(%eax,%eax,2), %eax
+	testl	%eax, %eax
+	jg	.L3
+.L2:
+	rep ret
+	.cfi_endproc
+.LFE0:
+	.size	silly, .-silly
+	.globl	main
+	.type	main, @function
+main:
+.LFB1:
+	.cfi_startproc
+	subl	$4, %esp
+	.cfi_def_cfa_offset 8
+	movl	$2, (%esp)
+	call	silly
+	addl	$4, %esp
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	main, .-main
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

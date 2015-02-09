@@ -1,0 +1,175 @@
+	.file	"loop.c"
+	.text
+	.p2align 4,,15
+	.globl	fact_dw
+	.type	fact_dw, @function
+fact_dw:
+.LFB0:
+	.cfi_startproc
+	movl	$1, %eax
+	.p2align 4,,10
+	.p2align 3
+.L3:
+	imull	%edi, %eax
+	subl	$1, %edi
+	testl	%edi, %edi
+	jg	.L3
+	rep ret
+	.cfi_endproc
+.LFE0:
+	.size	fact_dw, .-fact_dw
+	.p2align 4,,15
+	.globl	fact_while
+	.type	fact_while, @function
+fact_while:
+.LFB1:
+	.cfi_startproc
+	testl	%edi, %edi
+	movl	$1, %eax
+	jle	.L8
+	.p2align 4,,10
+	.p2align 3
+.L7:
+	imull	%edi, %eax
+	subl	$1, %edi
+	jne	.L7
+	rep ret
+.L8:
+	.p2align 4,,5
+	rep ret
+	.cfi_endproc
+.LFE1:
+	.size	fact_while, .-fact_while
+	.p2align 4,,15
+	.globl	fact_for1
+	.type	fact_for1, @function
+fact_for1:
+.LFB2:
+	.cfi_startproc
+	testl	%edi, %edi
+	movl	$1, %eax
+	jle	.L15
+	.p2align 4,,10
+	.p2align 3
+.L14:
+	imull	%edi, %eax
+	subl	$1, %edi
+	jne	.L14
+	rep ret
+.L15:
+	.p2align 4,,5
+	rep ret
+	.cfi_endproc
+.LFE2:
+	.size	fact_for1, .-fact_for1
+	.p2align 4,,15
+	.globl	fact_for2
+	.type	fact_for2, @function
+fact_for2:
+.LFB3:
+	.cfi_startproc
+	cmpl	$1, %edi
+	jle	.L22
+	addl	$1, %edi
+	movl	$2, %edx
+	movl	$1, %eax
+	.p2align 4,,10
+	.p2align 3
+.L21:
+	imull	%edx, %eax
+	addl	$1, %edx
+	cmpl	%edi, %edx
+	jne	.L21
+	rep ret
+.L22:
+	movl	$1, %eax
+	ret
+	.cfi_endproc
+.LFE3:
+	.size	fact_for2, .-fact_for2
+	.p2align 4,,15
+	.globl	sum_dw
+	.type	sum_dw, @function
+sum_dw:
+.LFB4:
+	.cfi_startproc
+	xorl	%eax, %eax
+	.p2align 4,,10
+	.p2align 3
+.L25:
+	addq	(%rdi), %rax
+	movq	8(%rdi), %rdi
+	testq	%rdi, %rdi
+	jne	.L25
+	rep ret
+	.cfi_endproc
+.LFE4:
+	.size	sum_dw, .-sum_dw
+	.p2align 4,,15
+	.globl	sum_while
+	.type	sum_while, @function
+sum_while:
+.LFB5:
+	.cfi_startproc
+	xorl	%eax, %eax
+	testq	%rdi, %rdi
+	je	.L29
+	.p2align 4,,10
+	.p2align 3
+.L28:
+	addq	(%rdi), %rax
+	movq	8(%rdi), %rdi
+	testq	%rdi, %rdi
+	jne	.L28
+	rep ret
+.L29:
+	rep ret
+	.cfi_endproc
+.LFE5:
+	.size	sum_while, .-sum_while
+	.p2align 4,,15
+	.globl	sum_for
+	.type	sum_for, @function
+sum_for:
+.LFB6:
+	.cfi_startproc
+	xorl	%eax, %eax
+	testq	%rdi, %rdi
+	je	.L36
+	.p2align 4,,10
+	.p2align 3
+.L35:
+	addq	(%rdi), %rax
+	movq	8(%rdi), %rdi
+	testq	%rdi, %rdi
+	jne	.L35
+	rep ret
+.L36:
+	rep ret
+	.cfi_endproc
+.LFE6:
+	.size	sum_for, .-sum_for
+	.p2align 4,,15
+	.globl	puzzle
+	.type	puzzle, @function
+puzzle:
+.LFB7:
+	.cfi_startproc
+	testl	%edi, %edi
+	movslq	%esi, %rax
+	jle	.L41
+	.p2align 4,,10
+	.p2align 3
+.L42:
+	movslq	%edi, %rdx
+	subl	%esi, %edi
+	imulq	%rdx, %rax
+	testl	%edi, %edi
+	jg	.L42
+.L41:
+	rep ret
+	.cfi_endproc
+.LFE7:
+	.size	puzzle, .-puzzle
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

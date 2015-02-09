@@ -1,0 +1,174 @@
+	.file	"compiler-eg.c"
+	.text
+	.globl	sum_abs
+	.type	sum_abs, @function
+sum_abs:
+.LFB0:
+	.cfi_startproc
+	pushl	%esi
+	.cfi_def_cfa_offset 8
+	.cfi_offset 6, -8
+	pushl	%ebx
+	.cfi_def_cfa_offset 12
+	.cfi_offset 3, -12
+	movl	12(%esp), %edx
+	movl	16(%esp), %eax
+	leal	(%edx,%eax,4), %esi
+	cmpl	%esi, %edx
+	jae	.L4
+	movl	$0, %eax
+.L3:
+	addl	$4, %edx
+	movl	-4(%edx), %ecx
+	sarl	$31, %ecx
+	movl	%ecx, %ebx
+	xorl	-4(%edx), %ebx
+	subl	%ecx, %ebx
+	addl	%ebx, %eax
+	cmpl	%edx, %esi
+	ja	.L3
+	jmp	.L2
+.L4:
+	movl	$0, %eax
+.L2:
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 8
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	sum_abs, .-sum_abs
+	.globl	find_max
+	.type	find_max, @function
+find_max:
+.LFB1:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %ecx
+	movl	12(%esp), %eax
+	testl	%eax, %eax
+	jle	.L9
+	movl	%ecx, %edx
+	leal	(%ecx,%eax,4), %ebx
+	movl	$-2147483648, %eax
+.L8:
+	movl	(%edx), %ecx
+	cmpl	%ecx, %eax
+	cmovl	%ecx, %eax
+	addl	$4, %edx
+	cmpl	%ebx, %edx
+	jne	.L8
+	jmp	.L7
+.L9:
+	movl	$-2147483648, %eax
+.L7:
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	find_max, .-find_max
+	.globl	find_maxp
+	.type	find_maxp, @function
+find_maxp:
+.LFB2:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %edx
+	movl	12(%esp), %eax
+	leal	(%edx,%eax,4), %ebx
+	cmpl	%ebx, %edx
+	jae	.L14
+	movl	$-2147483648, %eax
+.L13:
+	addl	$4, %edx
+	movl	-4(%edx), %ecx
+	cmpl	%ecx, %eax
+	cmovl	%ecx, %eax
+	cmpl	%edx, %ebx
+	ja	.L13
+	jmp	.L12
+.L14:
+	movl	$-2147483648, %eax
+.L12:
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	find_maxp, .-find_maxp
+	.globl	find_maxl
+	.type	find_maxl, @function
+find_maxl:
+.LFB3:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %ebx
+	movl	12(%esp), %edx
+	testl	%edx, %edx
+	je	.L19
+	movl	$-2147483648, %eax
+.L18:
+	subl	$1, %edx
+	movl	(%ebx,%edx,4), %ecx
+	cmpl	%ecx, %eax
+	cmovl	%ecx, %eax
+	testl	%edx, %edx
+	jne	.L18
+	jmp	.L17
+.L19:
+	movl	$-2147483648, %eax
+.L17:
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE3:
+	.size	find_maxl, .-find_maxl
+	.globl	raise_pwr2
+	.type	raise_pwr2, @function
+raise_pwr2:
+.LFB4:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %ecx
+	movl	12(%esp), %edx
+	testl	%edx, %edx
+	je	.L24
+	movl	$1, %eax
+.L23:
+	movl	%edx, %ebx
+	andl	$1, %ebx
+	negl	%ebx
+	andl	%ecx, %ebx
+	imull	%ebx, %eax
+	addl	%ecx, %ecx
+	shrl	%edx
+	jne	.L23
+	jmp	.L22
+.L24:
+	movl	$1, %eax
+.L22:
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE4:
+	.size	raise_pwr2, .-raise_pwr2
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

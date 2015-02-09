@@ -1,0 +1,83 @@
+	.file	"union3.c"
+	.text
+	.globl	get_s
+	.type	get_s, @function
+get_s:
+.LFB0:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	movl	4(%eax), %edx
+	movl	8(%esp), %eax
+	movl	%edx, (%eax)
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	get_s, .-get_s
+	.globl	get_v
+	.type	get_v, @function
+get_v:
+.LFB1:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	movzwl	(%eax), %edx
+	movl	8(%esp), %eax
+	movw	%dx, (%eax)
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	get_v, .-get_v
+	.globl	get_da
+	.type	get_da, @function
+get_da:
+.LFB2:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	leal	2(%eax), %edx
+	movl	8(%esp), %eax
+	movl	%edx, (%eax)
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	get_da, .-get_da
+	.globl	get_a
+	.type	get_a, @function
+get_a:
+.LFB3:
+	.cfi_startproc
+	movl	8(%esp), %eax
+	movl	4(%esp), %edx
+	movl	%edx, (%eax)
+	ret
+	.cfi_endproc
+.LFE3:
+	.size	get_a, .-get_a
+	.globl	get_as
+	.type	get_as, @function
+get_as:
+.LFB4:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	movl	4(%eax), %edx
+	movl	(%eax,%edx,4), %edx
+	movl	8(%esp), %eax
+	movl	%edx, (%eax)
+	ret
+	.cfi_endproc
+.LFE4:
+	.size	get_as, .-get_as
+	.globl	get_pval
+	.type	get_pval, @function
+get_pval:
+.LFB5:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	movl	8(%eax), %eax
+	movzbl	(%eax), %edx
+	movl	8(%esp), %eax
+	movb	%dl, (%eax)
+	ret
+	.cfi_endproc
+.LFE5:
+	.size	get_pval, .-get_pval
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

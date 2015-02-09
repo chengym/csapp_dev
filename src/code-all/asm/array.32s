@@ -1,0 +1,346 @@
+	.file	"array.c"
+	.text
+	.globl	get_value
+	.type	get_value, @function
+get_value:
+.LFB15:
+	.cfi_startproc
+	movl	8(%esp), %eax
+	leal	(%eax,%eax,2), %eax
+	sall	$2, %eax
+	addl	4(%esp), %eax
+	movl	12(%esp), %edx
+	movl	(%eax,%edx,4), %eax
+	ret
+	.cfi_endproc
+.LFE15:
+	.size	get_value, .-get_value
+	.globl	get_value2
+	.type	get_value2, @function
+get_value2:
+.LFB16:
+	.cfi_startproc
+	movl	8(%esp), %edx
+	movl	4(%esp), %eax
+	movl	(%eax,%edx,4), %eax
+	movl	12(%esp), %edx
+	movl	(%eax,%edx,4), %eax
+	ret
+	.cfi_endproc
+.LFE16:
+	.size	get_value2, .-get_value2
+	.globl	new_fix_matrix
+	.type	new_fix_matrix, @function
+new_fix_matrix:
+.LFB17:
+	.cfi_startproc
+	subl	$28, %esp
+	.cfi_def_cfa_offset 32
+	movl	$1024, (%esp)
+	call	malloc
+	addl	$28, %esp
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE17:
+	.size	new_fix_matrix, .-new_fix_matrix
+	.globl	fix_prod_ele
+	.type	fix_prod_ele, @function
+fix_prod_ele:
+.LFB18:
+	.cfi_startproc
+	pushl	%esi
+	.cfi_def_cfa_offset 8
+	.cfi_offset 6, -8
+	pushl	%ebx
+	.cfi_def_cfa_offset 12
+	.cfi_offset 3, -12
+	movl	20(%esp), %ecx
+	sall	$6, %ecx
+	addl	12(%esp), %ecx
+	movl	24(%esp), %eax
+	leal	0(,%eax,4), %edx
+	addl	16(%esp), %edx
+	leal	1024(%edx), %esi
+	movl	$0, %eax
+.L7:
+	movl	(%ecx), %ebx
+	imull	(%edx), %ebx
+	addl	%ebx, %eax
+	addl	$4, %ecx
+	addl	$64, %edx
+	cmpl	%esi, %edx
+	jne	.L7
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 8
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE18:
+	.size	fix_prod_ele, .-fix_prod_ele
+	.globl	fix_prod_ele_opt
+	.type	fix_prod_ele_opt, @function
+fix_prod_ele_opt:
+.LFB19:
+	.cfi_startproc
+	pushl	%esi
+	.cfi_def_cfa_offset 8
+	.cfi_offset 6, -8
+	pushl	%ebx
+	.cfi_def_cfa_offset 12
+	.cfi_offset 3, -12
+	movl	24(%esp), %eax
+	leal	0(,%eax,4), %edx
+	addl	16(%esp), %edx
+	movl	20(%esp), %ecx
+	sall	$6, %ecx
+	addl	12(%esp), %ecx
+	leal	1024(%edx), %esi
+	movl	$0, %eax
+.L11:
+	movl	(%ecx), %ebx
+	imull	(%edx), %ebx
+	addl	%ebx, %eax
+	addl	$64, %edx
+	addl	$4, %ecx
+	cmpl	%esi, %edx
+	jne	.L11
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 8
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE19:
+	.size	fix_prod_ele_opt, .-fix_prod_ele_opt
+	.globl	fix_set_diag
+	.type	fix_set_diag, @function
+fix_set_diag:
+.LFB20:
+	.cfi_startproc
+	movl	4(%esp), %ecx
+	movl	8(%esp), %edx
+	movl	$0, %eax
+.L15:
+	movl	%edx, (%ecx,%eax)
+	addl	$68, %eax
+	cmpl	$1088, %eax
+	jne	.L15
+	rep ret
+	.cfi_endproc
+.LFE20:
+	.size	fix_set_diag, .-fix_set_diag
+	.globl	fix_set_diag_opt
+	.type	fix_set_diag_opt, @function
+fix_set_diag_opt:
+.LFB21:
+	.cfi_startproc
+	movl	8(%esp), %ecx
+	movl	4(%esp), %edx
+	movl	$0, %eax
+.L18:
+	movl	%ecx, (%edx,%eax,4)
+	addl	$17, %eax
+	cmpl	$272, %eax
+	jne	.L18
+	rep ret
+	.cfi_endproc
+.LFE21:
+	.size	fix_set_diag_opt, .-fix_set_diag_opt
+	.globl	fix_ele
+	.type	fix_ele, @function
+fix_ele:
+.LFB22:
+	.cfi_startproc
+	movl	8(%esp), %eax
+	sall	$6, %eax
+	addl	4(%esp), %eax
+	movl	12(%esp), %edx
+	movl	(%eax,%edx,4), %eax
+	ret
+	.cfi_endproc
+.LFE22:
+	.size	fix_ele, .-fix_ele
+	.globl	new_var_matrix
+	.type	new_var_matrix, @function
+new_var_matrix:
+.LFB23:
+	.cfi_startproc
+	subl	$28, %esp
+	.cfi_def_cfa_offset 32
+	movl	32(%esp), %eax
+	imull	%eax, %eax
+	sall	$2, %eax
+	movl	%eax, (%esp)
+	call	malloc
+	addl	$28, %esp
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE23:
+	.size	new_var_matrix, .-new_var_matrix
+	.globl	var_ele
+	.type	var_ele, @function
+var_ele:
+.LFB24:
+	.cfi_startproc
+	movl	12(%esp), %eax
+	sall	$2, %eax
+	imull	4(%esp), %eax
+	movl	16(%esp), %ecx
+	leal	0(,%ecx,4), %edx
+	addl	8(%esp), %edx
+	movl	(%edx,%eax), %eax
+	ret
+	.cfi_endproc
+.LFE24:
+	.size	var_ele, .-var_ele
+	.globl	pvar_ele
+	.type	pvar_ele, @function
+pvar_ele:
+.LFB25:
+	.cfi_startproc
+	movl	12(%esp), %eax
+	sall	$2, %eax
+	imull	4(%esp), %eax
+	movl	16(%esp), %ecx
+	leal	0(,%ecx,4), %edx
+	addl	8(%esp), %edx
+	movl	(%edx,%eax), %eax
+	ret
+	.cfi_endproc
+.LFE25:
+	.size	pvar_ele, .-pvar_ele
+	.globl	var_prod_ele
+	.type	var_prod_ele, @function
+var_prod_ele:
+.LFB26:
+	.cfi_startproc
+	pushl	%ebp
+	.cfi_def_cfa_offset 8
+	.cfi_offset 5, -8
+	pushl	%edi
+	.cfi_def_cfa_offset 12
+	.cfi_offset 7, -12
+	pushl	%esi
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	pushl	%ebx
+	.cfi_def_cfa_offset 20
+	.cfi_offset 3, -20
+	movl	20(%esp), %esi
+	testl	%esi, %esi
+	jle	.L27
+	movl	32(%esp), %eax
+	leal	0(,%eax,4), %ebp
+	imull	%esi, %ebp
+	addl	24(%esp), %ebp
+	leal	0(,%esi,4), %edi
+	movl	36(%esp), %edx
+	movl	28(%esp), %eax
+	leal	(%eax,%edx,4), %ecx
+	movl	$0, %eax
+	movl	$0, %edx
+.L26:
+	movl	0(%ebp,%edx,4), %ebx
+	imull	(%ecx), %ebx
+	addl	%ebx, %eax
+	addl	$1, %edx
+	addl	%edi, %ecx
+	cmpl	%esi, %edx
+	jne	.L26
+	jmp	.L25
+.L27:
+	movl	$0, %eax
+.L25:
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 16
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 12
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 8
+	popl	%ebp
+	.cfi_restore 5
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE26:
+	.size	var_prod_ele, .-var_prod_ele
+	.globl	var_prod_ele_opt
+	.type	var_prod_ele_opt, @function
+var_prod_ele_opt:
+.LFB27:
+	.cfi_startproc
+	pushl	%edi
+	.cfi_def_cfa_offset 8
+	.cfi_offset 7, -8
+	pushl	%esi
+	.cfi_def_cfa_offset 12
+	.cfi_offset 6, -12
+	pushl	%ebx
+	.cfi_def_cfa_offset 16
+	.cfi_offset 3, -16
+	movl	16(%esp), %esi
+	movl	28(%esp), %eax
+	leal	0(,%eax,4), %edi
+	imull	%esi, %edi
+	addl	20(%esp), %edi
+	movl	32(%esp), %eax
+	leal	0(,%eax,4), %ecx
+	addl	24(%esp), %ecx
+	testl	%esi, %esi
+	jle	.L32
+	sall	$2, %esi
+	movl	%edi, %edx
+	addl	%esi, %edi
+	movl	$0, %eax
+.L31:
+	movl	(%edx), %ebx
+	imull	(%ecx), %ebx
+	addl	%ebx, %eax
+	addl	%esi, %ecx
+	addl	$4, %edx
+	cmpl	%edi, %edx
+	jne	.L31
+	jmp	.L30
+.L32:
+	movl	$0, %eax
+.L30:
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 12
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 8
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE27:
+	.size	var_prod_ele_opt, .-var_prod_ele_opt
+	.globl	B
+	.data
+	.align 4
+	.type	B, @object
+	.size	B, 16
+B:
+	.long	row0
+	.long	row1
+	.long	row2
+	.long	row3
+	.comm	row3,12,4
+	.comm	row2,12,4
+	.comm	row1,12,4
+	.comm	row0,12,4
+	.comm	A,60,32
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

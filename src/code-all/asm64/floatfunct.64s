@@ -1,0 +1,113 @@
+	.file	"floatfunct.c"
+	.text
+	.p2align 4,,15
+	.globl	funct
+	.type	funct, @function
+funct:
+.LFB0:
+	.cfi_startproc
+	unpcklps	%xmm1, %xmm1
+	cvtps2pd	%xmm1, %xmm1
+	mulsd	%xmm0, %xmm1
+	cvtsi2sd	%edi, %xmm0
+	divsd	%xmm0, %xmm2
+	subsd	%xmm2, %xmm1
+	movapd	%xmm1, %xmm0
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	funct, .-funct
+	.p2align 4,,15
+	.globl	find_range
+	.type	find_range, @function
+find_range:
+.LFB1:
+	.cfi_startproc
+	xorps	%xmm1, %xmm1
+	ucomiss	%xmm0, %xmm1
+	ja	.L6
+	ucomiss	%xmm1, %xmm0
+	jnp	.L12
+.L9:
+	xorl	%eax, %eax
+	ucomiss	%xmm1, %xmm0
+	setbe	%al
+	addl	$2, %eax
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L12:
+	movl	$1, %eax
+	jne	.L9
+	rep ret
+	.p2align 4,,10
+	.p2align 3
+.L6:
+	xorl	%eax, %eax
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	find_range, .-find_range
+	.p2align 4,,15
+	.globl	xfer
+	.type	xfer, @function
+xfer:
+.LFB2:
+	.cfi_startproc
+	cvtsi2ss	ss1(%rip), %xmm0
+	movss	%xmm0, si+16(%rip)
+	cvtsi2sd	ss2(%rip), %xmm0
+	movsd	%xmm0, si+24(%rip)
+	cvtsi2ssq	ss1+8(%rip), %xmm0
+	movss	%xmm0, sl+16(%rip)
+	cvtsi2sdq	ss2+8(%rip), %xmm0
+	movsd	%xmm0, sl+24(%rip)
+	movss	ss1+16(%rip), %xmm0
+	cvttss2si	%xmm0, %eax
+	movss	ss2+16(%rip), %xmm0
+	movl	%eax, sf(%rip)
+	cvttss2siq	%xmm0, %rax
+	unpcklps	%xmm0, %xmm0
+	cvtps2pd	%xmm0, %xmm1
+	movsd	ss1+24(%rip), %xmm0
+	movsd	%xmm1, sf+24(%rip)
+	movsd	ss2+24(%rip), %xmm1
+	movq	%rax, sf+8(%rip)
+	cvttsd2si	%xmm0, %eax
+	unpcklpd	%xmm0, %xmm0
+	cvtpd2ps	%xmm0, %xmm2
+	movl	%eax, sd(%rip)
+	cvttsd2siq	%xmm1, %rax
+	movss	%xmm2, sd+16(%rip)
+	movq	%rax, sd+8(%rip)
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	xfer, .-xfer
+	.p2align 4,,15
+	.globl	copy_vals
+	.type	copy_vals, @function
+copy_vals:
+.LFB3:
+	.cfi_startproc
+	cvttss2si	%xmm0, %eax
+	cvtsi2sdq	%rsi, %xmm0
+	movl	%eax, (%rdx)
+	cvttsd2siq	%xmm1, %rax
+	unpcklpd	%xmm1, %xmm1
+	cvtpd2ps	%xmm1, %xmm2
+	movq	%rax, (%rcx)
+	movss	%xmm2, (%r8)
+	movsd	%xmm0, (%r9)
+	ret
+	.cfi_endproc
+.LFE3:
+	.size	copy_vals, .-copy_vals
+	.comm	sd,32,32
+	.comm	sf,32,32
+	.comm	sl,32,32
+	.comm	si,32,32
+	.comm	ss2,32,32
+	.comm	ss1,32,32
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

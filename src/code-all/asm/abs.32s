@@ -1,0 +1,232 @@
+	.file	"abs.c"
+	.text
+	.globl	absdiff
+	.type	absdiff, @function
+absdiff:
+.LFB39:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %ecx
+	movl	12(%esp), %edx
+	movl	%edx, %eax
+	subl	%ecx, %eax
+	movl	%ecx, %ebx
+	subl	%edx, %ebx
+	cmpl	%edx, %ecx
+	cmovge	%ebx, %eax
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE39:
+	.size	absdiff, .-absdiff
+	.globl	gotodiff
+	.type	gotodiff, @function
+gotodiff:
+.LFB40:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %ecx
+	movl	12(%esp), %edx
+	movl	%edx, %eax
+	subl	%ecx, %eax
+	movl	%ecx, %ebx
+	subl	%edx, %ebx
+	cmpl	%edx, %ecx
+	cmovge	%ebx, %eax
+.L6:
+.L7:
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE40:
+	.size	gotodiff, .-gotodiff
+	.globl	absdiff2
+	.type	absdiff2, @function
+absdiff2:
+.LFB41:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %ecx
+	movl	12(%esp), %edx
+	movl	%edx, %eax
+	subl	%ecx, %eax
+	movl	%ecx, %ebx
+	subl	%edx, %ebx
+	cmpl	%edx, %ecx
+	cmovge	%ebx, %eax
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE41:
+	.size	absdiff2, .-absdiff2
+	.globl	cmovdiff
+	.type	cmovdiff, @function
+cmovdiff:
+.LFB42:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %edx
+	movl	12(%esp), %ecx
+	movl	%edx, %eax
+	subl	%ecx, %eax
+	movl	%ecx, %ebx
+	subl	%edx, %ebx
+	cmpl	%edx, %ecx
+	cmovg	%ebx, %eax
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE42:
+	.size	cmovdiff, .-cmovdiff
+	.globl	absdiff_e
+	.type	absdiff_e, @function
+absdiff_e:
+.LFB43:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %ecx
+	movl	12(%esp), %edx
+	movl	%edx, %eax
+	subl	%ecx, %eax
+	movl	%ecx, %ebx
+	subl	%edx, %ebx
+	cmpl	%edx, %ecx
+	cmovge	%ebx, %eax
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE43:
+	.size	absdiff_e, .-absdiff_e
+	.globl	absdiff_se
+	.type	absdiff_se, @function
+absdiff_se:
+.LFB44:
+	.cfi_startproc
+	movl	4(%esp), %edx
+	movl	8(%esp), %ecx
+	movl	%edx, %eax
+	subl	%ecx, %eax
+	cmpl	%ecx, %edx
+	jge	.L23
+	addl	$1, lcount
+	movl	%ecx, %eax
+	subl	%edx, %eax
+.L23:
+	rep ret
+	.cfi_endproc
+.LFE44:
+	.size	absdiff_se, .-absdiff_se
+	.globl	gotodiff_alt
+	.type	gotodiff_alt, @function
+gotodiff_alt:
+.LFB45:
+	.cfi_startproc
+	pushl	%ebx
+	.cfi_def_cfa_offset 8
+	.cfi_offset 3, -8
+	movl	8(%esp), %ecx
+	movl	12(%esp), %edx
+	movl	%ecx, %eax
+	subl	%edx, %eax
+	movl	%edx, %ebx
+	subl	%ecx, %ebx
+	cmpl	%edx, %ecx
+	cmovl	%ebx, %eax
+.L25:
+.L26:
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE45:
+	.size	gotodiff_alt, .-gotodiff_alt
+	.section	.rodata.str1.4,"aMS",@progbits,1
+	.align 4
+.LC0:
+	.string	"x = %d, y = %d, |x-y| = (%d,%d,%d)\n"
+	.text
+	.globl	main
+	.type	main, @function
+main:
+.LFB46:
+	.cfi_startproc
+	pushl	%ebp
+	.cfi_def_cfa_offset 8
+	.cfi_offset 5, -8
+	movl	%esp, %ebp
+	.cfi_def_cfa_register 5
+	pushl	%esi
+	pushl	%ebx
+	andl	$-16, %esp
+	subl	$32, %esp
+	.cfi_offset 6, -12
+	.cfi_offset 3, -16
+	movl	12(%ebp), %esi
+	movl	$10, 8(%esp)
+	movl	$0, 4(%esp)
+	movl	4(%esi), %eax
+	movl	%eax, (%esp)
+	call	strtol
+	movl	%eax, %ebx
+	movl	$10, 8(%esp)
+	movl	$0, 4(%esp)
+	movl	8(%esi), %eax
+	movl	%eax, (%esp)
+	call	strtol
+	movl	%eax, %edx
+	subl	%ebx, %edx
+	movl	%ebx, %ecx
+	subl	%eax, %ecx
+	cmpl	%eax, %ebx
+	cmovge	%ecx, %edx
+	movl	%edx, 24(%esp)
+	movl	%edx, 20(%esp)
+	movl	%edx, 16(%esp)
+	movl	%eax, 12(%esp)
+	movl	%ebx, 8(%esp)
+	movl	$.LC0, 4(%esp)
+	movl	$1, (%esp)
+	call	__printf_chk
+	movl	$0, %eax
+	leal	-8(%ebp), %esp
+	popl	%ebx
+	.cfi_restore 3
+	popl	%esi
+	.cfi_restore 6
+	popl	%ebp
+	.cfi_restore 5
+	.cfi_def_cfa 4, 4
+	ret
+	.cfi_endproc
+.LFE46:
+	.size	main, .-main
+	.globl	lcount
+	.bss
+	.align 4
+	.type	lcount, @object
+	.size	lcount, 4
+lcount:
+	.zero	4
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

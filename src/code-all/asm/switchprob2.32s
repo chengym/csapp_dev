@@ -1,0 +1,132 @@
+	.file	"switchprob2.c"
+	.text
+	.globl	switcher
+	.type	switcher, @function
+switcher:
+.LFB39:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	cmpl	$7, %eax
+	ja	.L8
+	jmp	*.L4(,%eax,4)
+	.section	.rodata
+	.align 4
+	.align 4
+.L4:
+	.long	.L3
+	.long	.L8
+	.long	.L5
+	.long	.L8
+	.long	.L2
+	.long	.L7
+	.long	.L8
+	.long	.L5
+	.text
+.L7:
+	movl	8(%esp), %eax
+	xorl	$15, %eax
+	movl	%eax, 12(%esp)
+.L3:
+	movl	12(%esp), %eax
+	addl	$112, %eax
+	ret
+.L5:
+	movl	12(%esp), %eax
+	addl	8(%esp), %eax
+	sall	$2, %eax
+	ret
+.L8:
+	movl	8(%esp), %eax
+.L2:
+	rep ret
+	.cfi_endproc
+.LFE39:
+	.size	switcher, .-switcher
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.LC0:
+	.string	"Switcher(%d, %d, %d) --> %d\n"
+	.text
+	.globl	main
+	.type	main, @function
+main:
+.LFB40:
+	.cfi_startproc
+	pushl	%ebp
+	.cfi_def_cfa_offset 8
+	.cfi_offset 5, -8
+	movl	%esp, %ebp
+	.cfi_def_cfa_register 5
+	pushl	%edi
+	pushl	%esi
+	pushl	%ebx
+	andl	$-16, %esp
+	subl	$48, %esp
+	.cfi_offset 7, -12
+	.cfi_offset 6, -16
+	.cfi_offset 3, -20
+	movl	12(%ebp), %esi
+	movl	$1, 36(%esp)
+	movl	$2, 40(%esp)
+	movl	$3, 44(%esp)
+	movl	8(%ebp), %eax
+	leal	-1(%eax), %ebx
+	testl	%ebx, %ebx
+	jg	.L10
+	jmp	.L11
+.L12:
+	movl	$10, 8(%esp)
+	movl	$0, 4(%esp)
+	movl	12(%esi), %eax
+	movl	%eax, (%esp)
+	call	strtol
+	movl	%eax, 44(%esp)
+	jmp	.L11
+.L10:
+	movl	$10, 8(%esp)
+	movl	$0, 4(%esp)
+	movl	4(%esi), %eax
+	movl	%eax, (%esp)
+	call	strtol
+	movl	%eax, 36(%esp)
+	cmpl	$1, %ebx
+	jle	.L11
+	movl	$10, 8(%esp)
+	movl	$0, 4(%esp)
+	movl	8(%esi), %eax
+	movl	%eax, (%esp)
+	call	strtol
+	movl	%eax, 40(%esp)
+	cmpl	$2, %ebx
+	jg	.L12
+.L11:
+	movl	44(%esp), %edi
+	movl	40(%esp), %esi
+	movl	36(%esp), %ebx
+	movl	%edi, 8(%esp)
+	movl	%esi, 4(%esp)
+	movl	%ebx, (%esp)
+	call	switcher
+	movl	%eax, 20(%esp)
+	movl	%edi, 16(%esp)
+	movl	%esi, 12(%esp)
+	movl	%ebx, 8(%esp)
+	movl	$.LC0, 4(%esp)
+	movl	$1, (%esp)
+	call	__printf_chk
+	movl	$0, %eax
+	leal	-12(%ebp), %esp
+	popl	%ebx
+	.cfi_restore 3
+	popl	%esi
+	.cfi_restore 6
+	popl	%edi
+	.cfi_restore 7
+	popl	%ebp
+	.cfi_restore 5
+	.cfi_def_cfa 4, 4
+	ret
+	.cfi_endproc
+.LFE40:
+	.size	main, .-main
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

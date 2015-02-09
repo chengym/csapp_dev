@@ -1,0 +1,28 @@
+	.file	"frame.c"
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.LC0:
+	.string	"%x %x"
+	.text
+	.globl	proc
+	.type	proc, @function
+proc:
+.LFB24:
+	.cfi_startproc
+	subl	$44, %esp
+	.cfi_def_cfa_offset 48
+	leal	24(%esp), %eax
+	movl	%eax, 8(%esp)
+	leal	28(%esp), %eax
+	movl	%eax, 4(%esp)
+	movl	$.LC0, (%esp)
+	call	__isoc99_scanf
+	movl	24(%esp), %eax
+	subl	28(%esp), %eax
+	addl	$44, %esp
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE24:
+	.size	proc, .-proc
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

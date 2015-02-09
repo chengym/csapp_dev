@@ -1,0 +1,80 @@
+	.file	"muldiv.c"
+	.text
+	.globl	shrink
+	.type	shrink, @function
+shrink:
+.LFB0:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	shrink, .-shrink
+	.globl	prod
+	.type	prod, @function
+prod:
+.LFB1:
+	.cfi_startproc
+	pushl	%edi
+	.cfi_def_cfa_offset 8
+	.cfi_offset 7, -8
+	pushl	%esi
+	.cfi_def_cfa_offset 12
+	.cfi_offset 6, -12
+	pushl	%ebx
+	.cfi_def_cfa_offset 16
+	.cfi_offset 3, -16
+	movl	16(%esp), %edx
+	movl	20(%esp), %eax
+	movl	%edx, %edi
+	sarl	$31, %edi
+	movl	%eax, %ebx
+	sarl	$31, %ebx
+	movl	%edi, %esi
+	imull	%eax, %esi
+	movl	%ebx, %ecx
+	imull	%edx, %ecx
+	addl	%esi, %ecx
+	mull	%edx
+	addl	%ecx, %edx
+	leal	(%edx,%eax,2), %eax
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 12
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 8
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	prod, .-prod
+	.globl	combine
+	.type	combine, @function
+combine:
+.LFB2:
+	.cfi_startproc
+	movl	8(%esp), %eax
+	addl	4(%esp), %eax
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	combine, .-combine
+	.globl	div
+	.type	div, @function
+div:
+.LFB3:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	cltd
+	idivl	8(%esp)
+	addl	%edx, %eax
+	addl	%eax, %eax
+	ret
+	.cfi_endproc
+.LFE3:
+	.size	div, .-div
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

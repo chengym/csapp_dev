@@ -1,0 +1,35 @@
+	.file	"convert.c"
+	.text
+	.p2align 4,,15
+	.globl	gfun
+	.type	gfun, @function
+gfun:
+.LFB0:
+	.cfi_startproc
+	leal	(%rdi,%rsi), %eax
+	movslq	%edi, %rdi
+	movslq	%esi, %rsi
+	addq	%rdi, %rsi
+	cltq
+	orq	%rsi, %rax
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	gfun, .-gfun
+	.p2align 4,,15
+	.globl	gfun_u
+	.type	gfun_u, @function
+gfun_u:
+.LFB1:
+	.cfi_startproc
+	leal	(%rdi,%rsi), %eax
+	movl	%edi, %edi
+	movl	%esi, %esi
+	addq	%rdi, %rsi
+	orq	%rsi, %rax
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	gfun_u, .-gfun_u
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

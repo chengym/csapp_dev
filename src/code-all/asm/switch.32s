@@ -1,0 +1,93 @@
+	.file	"switch.c"
+	.text
+	.globl	switch_eg
+	.type	switch_eg, @function
+switch_eg:
+.LFB0:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	movl	8(%esp), %ecx
+	leal	-100(%ecx), %edx
+	cmpl	$6, %edx
+	ja	.L8
+	jmp	*.L4(,%edx,4)
+	.section	.rodata
+	.align 4
+	.align 4
+.L4:
+	.long	.L3
+	.long	.L8
+	.long	.L5
+	.long	.L6
+	.long	.L7
+	.long	.L8
+	.long	.L7
+	.text
+.L3:
+	leal	(%eax,%eax,2), %edx
+	leal	(%eax,%edx,4), %eax
+	ret
+.L5:
+	addl	$10, %eax
+.L6:
+	addl	$11, %eax
+	ret
+.L7:
+	imull	%eax, %eax
+	ret
+.L8:
+	movl	$0, %eax
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	switch_eg, .-switch_eg
+	.globl	switch_eg_impl
+	.type	switch_eg_impl, @function
+switch_eg_impl:
+.LFB1:
+	.cfi_startproc
+	movl	8(%esp), %eax
+	subl	$100, %eax
+	cmpl	$6, %eax
+	ja	.L10
+	jmp	*jt.1384(,%eax,4)
+.L10:
+	movl	$0, %eax
+	ret
+.L12:
+	.p2align 4,,7
+	jmp	.L13
+.L14:
+	movl	4(%esp), %eax
+	leal	(%eax,%eax,2), %eax
+	movl	4(%esp), %edx
+	leal	(%edx,%eax,4), %eax
+	ret
+.L15:
+	addl	$10, 4(%esp)
+.L13:
+	movl	4(%esp), %eax
+	addl	$11, %eax
+	ret
+.L16:
+	movl	4(%esp), %eax
+	imull	%eax, %eax
+.L11:
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	switch_eg_impl, .-switch_eg_impl
+	.section	.rodata
+	.align 4
+	.type	jt.1384, @object
+	.size	jt.1384, 28
+jt.1384:
+	.long	.L14
+	.long	.L10
+	.long	.L15
+	.long	.L12
+	.long	.L16
+	.long	.L10
+	.long	.L16
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

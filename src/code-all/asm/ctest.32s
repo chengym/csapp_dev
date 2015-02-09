@@ -1,0 +1,46 @@
+	.file	"ctest.c"
+	.text
+	.globl	ctest
+	.type	ctest, @function
+ctest:
+.LFB0:
+	.cfi_startproc
+	pushl	%esi
+	.cfi_def_cfa_offset 8
+	.cfi_offset 6, -8
+	pushl	%ebx
+	.cfi_def_cfa_offset 12
+	.cfi_offset 3, -12
+	movl	12(%esp), %edx
+	movl	16(%esp), %eax
+	movl	20(%esp), %ecx
+	cmpl	%eax, %edx
+	setl	%bl
+	movl	%ebx, %esi
+	testl	%edx, %edx
+	setg	%bl
+	addl	%ebx, %esi
+	cmpl	%eax, %ecx
+	setg	%bl
+	addl	%ebx, %esi
+	cmpl	%edx, %eax
+	setb	%bl
+	leal	(%esi,%ebx), %eax
+	cmpw	%dx, %cx
+	setge	%bl
+	addl	%ebx, %eax
+	cmpb	%cl, %dl
+	setne	%dl
+	addl	%edx, %eax
+	popl	%ebx
+	.cfi_restore 3
+	.cfi_def_cfa_offset 8
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 4
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	ctest, .-ctest
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits

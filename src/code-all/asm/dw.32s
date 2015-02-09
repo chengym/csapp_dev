@@ -1,0 +1,25 @@
+	.file	"dw.c"
+	.text
+	.globl	dw_loop
+	.type	dw_loop, @function
+dw_loop:
+.LFB0:
+	.cfi_startproc
+	movl	4(%esp), %eax
+	movl	8(%esp), %ecx
+	movl	12(%esp), %edx
+.L3:
+	addl	%edx, %eax
+	imull	%edx, %ecx
+	subl	$1, %edx
+	cmpl	%edx, %ecx
+	jge	.L2
+	testl	%edx, %edx
+	jg	.L3
+.L2:
+	rep ret
+	.cfi_endproc
+.LFE0:
+	.size	dw_loop, .-dw_loop
+	.ident	"GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2"
+	.section	.note.GNU-stack,"",@progbits
